@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSFS Flight Deck - Command Center</title>
+    <style>
+        :root {
+            --bg-dark: #060913;
+            --panel-bg: rgba(15, 23, 42, 0.75);
+            --panel-border: rgba(56, 189, 248, 0.2);
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
+            --accent-green: #00ff66;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: radial-gradient(circle at 50% 0%, #111827 0%, #060913 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--panel-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #060913;
+            font-weight: 900;
+            font-size: 0.85rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .progress-hud {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--panel-border);
+        }
+
+        .progress-bar-container {
+            width: 140px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-family: monospace;
+        }
+
+        /* --- CONTENEDOR VISTAS --- */
+        .viewport {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .view-screen {
+            width: 100%;
+            max-width: 900px;
+            display: none;
+        }
+
+        .view-screen.active {
+            display: block;
+        }
+
+        /* --- PANTALLA 1: MENU PRINCIPAL --- */
+        .menu-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .menu-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            font-size: 0.95rem;
+        }
+
+        .aircraft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .aircraft-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+        }
+
+        .aircraft-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+        }
+
+        .aircraft-card h3 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .aircraft-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .card-btn {
+            margin-top: 20px;
+            align-self: flex-start;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* --- PANTALLA 2: CHECKLIST PAGINADA --- */
+        .checklist-container {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .checklist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .page-badge {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-cyan);
+            background: linear-gradient(90deg, rgba(0, 242, 254, 0.1), transparent);
+            padding: 12px 16px;
+            border-left: 3px solid var(--accent-cyan);
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .items-list {
+            min-height: 250px;
+            margin-bottom: 25px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .checklist-item.completed {
+            background: rgba(0, 255, 102, 0.05);
+            border-color: rgba(0, 255, 102, 0.2);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-muted);
+            border-radius: 4px;
+            margin-right: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            border-color: var(--accent-green);
+            background-color: var(--accent-green);
+        }
+
+        .checklist-item input[type="checkbox"]:checked::after {
+            content: "✓";
+            color: #060913;
+            font-weight: 900;
+            font-size: 13px;
+        }
+
+        .checklist-item label {
+            font-size: 0.95rem;
+            cursor: pointer;
+            flex-grow: 1;
+            color: #cbd5e1;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + label {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        /* --- CONTROLES DE NAVEGACION INFERIOR --- */
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #060913;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-container">
+            <div class="logo-badge">MSFS</div>
+            <span style="font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;" id="header-title">Command Center</span>
+        </div>
+
+        <div class="progress-hud" id="hud-progress" style="display: none;">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <span class="progress-text" id="progress-text">0%</span>
+        </div>
+    </header>
+
+    <div class="viewport">
+        <!-- PANTALLA 1: MENU PRINCIPAL DE SELECCION -->
+        <div id="main-menu" class="view-screen active">
+            <h1 class="menu-title">SELECCIONA TU AERONAVE</h1>
+            <p class="menu-subtitle">Elige una cabina para cargar los procedimientos paso a paso</p>
+            
+            <div class="aircraft-grid">
+                <div class="aircraft-card" onclick="selectAircraft('a320')">
+                    <div>
+                        <h3>Airbus A320 NEO</h3>
+                        <p>Comercial Turbofan de corto/medio radio.</p>
+                    </div>
+                    <div class="card-btn">ABRIR CABINA &rarr;</div>
+                </div>
+
+                <div class="aircraft-card" onclick="selectAircraft('a330')">
+                    <div>
+                        <h3>Airbus A330-200/300</h3>
+                        <p>Comercial Wide-body de largo alcance.</p>
+                    </div>
+                    <div class="card-btn">ABRIR CABINA &rarr;</div>
+                </div>
+
+                <div class="aircraft-card" onclick="selectAircraft('b737')">
+                    <div>
+                        <h3>Boeing 737 MAX 8</h3>
+                        <p>Comercial de fuselaje estrecho altamente automatizado.</p>
+                    </div>
+                    <div class="card-btn">ABRIR CABINA &rarr;</div>
+                </div>
+
+                <div class="aircraft-card" onclick="selectAircraft('b747')">
+                    <div>
+                        <h3>Boeing 747</h3>
+                        <p>La Reina de los Cielos. Cuatrimotor pesado.</p>
+                    </div>
+                    <div class="card-btn">ABRIR CABINA &rarr;</div>
+                </div>
+
+                <div class="aircraft-card" onclick="selectAircraft('c172')">
+                    <div>
+                        <h3>Cessna 172 Skyhawk</h3>
+                        <p>Aviación General. Monomotor de pistón.</p>
+                    </div>
+                    <div class="card-btn">ABRIR CABINA &rarr;</div>
+                </div>
+
+                <div class="aircraft-card" onclick="selectAircraft('cvjg2')">
+                    <div>
+                        <h3>Cirrus Vision Jet SF50</h3>
+                        <p>Jet privado ligero de un solo motor.</p>
+                    </div>
+                    <div class="card-btn">ABRIR CABINA &rarr;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 2: VISTA PAGINADA DE PASOS -->
+        <div id="checklist-view" class="view-screen">
+            <div class="checklist-container">
+                <div class="checklist-header">
+                    <button class="back-btn" onclick="showMenu()">&larr; CAMBIAR AVIÓN</button>
+                    <span class="page-badge" id="page-indicator">FASE 1 DE 10</span>
+                </div>
+
+                <div class="section-title" id="section-title">CARGANDO...</div>
+
+                <div class="items-list" id="items-container"></div>
+
+                <div class="pagination-controls">
+                    <button class="nav-btn" id="prev-btn" onclick="changePage(-1)">&larr; ANTERIOR</button>
+                    <button class="nav-btn" id="next-btn" onclick="changePage(1)">SIGUIENTE &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BASE DE DATOS MANTENIDA
+        const checklistsData = {
+            a320: {
+                title: "Airbus A320 NEO",
+                sections: [
+                    { title: "1. START & PRE-TAXI", items: ["BAT1/BAT2 - ON", "External Power - ON", "NAV LIGHTS - POS 1", "Overhead panel items - ON", "EMERGENCY EXIT LIGHTS - ARM", "NO SMOKING - ON", "SEATBELTS - ON", "NAV1 / NAV2 / NAV3 - ON", "QNH - SET", "FD - ON", "Request ground services", "Fill the fuel tank", "Request ATC clearance for taxi", "MCDU", "Cruise altitude - SET", "APU master switch - ON + 3 missisipis", "APU START -ON", "APU bleed - ON", "BEACON Lights - ON", "Engine mode selector - START", "ENG1 - ON", "ENG2 - ON", "AUTOBRAKE - MAX", "TO Config - CALCULATED", "FLAPS - SET", "SPOILERS - ARM", "TCAS - TA/RA", "TCAS MODE - ON", "WXR/PWS - 1", "SELECTOR WX L&R - ALL WX", "Retire ground services", "APU master switch - OFF", "APU bleed - OFF", "Engine mode selector - NORM", "Request pushback", "Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON"] },
+                    { title: "2. TAXI", items: ["Taxi to runway"] },
+                    { title: "3. PRE TAKE OFF", items: ["Request ATC take off clearance", "TO Lights - ON"] },
+                    { title: "4. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF"] },
+                    { title: "5. NAVIGATION", items: ["Fasten seatbelts - OFF", "Speed MACH - SET", "Continue navigation"] },
+                    { title: "6. APPROACH", items: ["RAD NAV - CHECK", "Approach config - COMPLETED", "Fasten seatbelts - ON (at FL150 above landing)", "Reduce selected speed", "FLAPS - EXTENDED"] },
+                    { title: "7. FINAL APPROACH", items: ["CONTACT ATC - REQUEST LANDING", "LS - ON", "APPR - ON", "FLAPS - POSITION 2", "GEAR - DOWN", "Landing Lights - ON", "FLAPS - FULL", "Landing speed - CHECK (IAS 150 - 130 kts)", "SPOILERS ARM - CHECK", "FLAPS 40º - CHECK"] },
+                    { title: "8. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º", "SPOILERS - 0%"] },
+                    { title: "9. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU - CONECTED", "External power - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00100ft"] },
+                    { title: "10. FULL SHUTDOWN (IF NECESSARY)", items: ["External power - OFF", "BAT1 / BAT2 - OFF"] }
+                ]
+            },
+            a330: {
+                title: "Airbus A330-200/300",
+                sections: [
+                    { title: "1. START & PRE-TAXI", items: ["BAT1/BAT2 - ON", "External Power A - ON", "External Power B - AUTO", "NAV LIGHTS - POS 1", "Overhead panel items - ON", "EMERGENCY EXIT LIGHTS - ARM", "NO SMOKING - ON", "SEATBELTS - ON", "NAV1 / NAV2 / NAV3 - ON", "QNH - SET", "FD - ON", "Request ground services", "Fill the fuel tank", "Request ATC clearance for taxi", "MCDU", "Cruise altitude - SET", "APU master switch - ON + 3 missisipis", "APU START -ON", "APU bleed - ON", "BEACON Lights - ON", "Engine mode selector - START", "ENG1 - ON", "ENG2 - ON", "AUTOBRAKE - MAX", "TO Config - CALCULATED", "FLAPS - SET", "SPOILERS - ARM", "TCAS - TA/RA", "TCAS MODE - ON", "WXR/PWS - 1", "SELECTOR WX L&R - ALL WX", "Retire ground services", "APU master switch - OFF", "APU bleed - OFF", "Engine mode selector - NORM", "Request pushback", "Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON"] },
+                    { title: "2. TAXI", items: ["Taxi to runway"] },
+                    { title: "3. PRE TAKE OFF", items: ["Request ATC take off clearance", "TO Lights - ON"] },
+                    { title: "4. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF"] },
+                    { title: "5. NAVIGATION", items: ["Fasten seatbelts - OFF", "Speed MACH - SET", "Continue navigation"] },
+                    { title: "6. APPROACH", items: ["RAD NAV - CHECK", "Approach config - COMPLETED", "Fasten seatbelts - ON (at FL150 above landing)", "Reduce selected speed", "FLAPS - POSITION 1"] },
+                    { title: "7. FINAL APPROACH", items: ["CONTACT ATC - REQUEST LANDING", "LS - ON", "APPR - ON", "FLAPS - POSITION 2", "GEAR - DOWN", "Landing Lights - ON", "FLAPS - FULL", "Landing speed - CHECK (IAS 150 - 130 kts)", "SPOILERS ARM - CHECK", "FLAPS 40º - CHECK"] },
+                    { title: "8. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º", "SPOILERS - 0%"] },
+                    { title: "9. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU - CONECTED", "External power - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00100ft"] },
+                    { title: "10. FULL SHUTDOWN (IF NECESSARY)", items: ["External power - OFF", "BAT1 / BAT2 - OFF"] }
+                ]
+            },
+            b737: {
+                title: "Boeing 737 MAX 8",
+                sections: [
+                    { title: "1. START & PRE-TAXI", items: ["Battery - ON", "Emergency Lights - ARM", "Ground power - ACT", "IRS - NAV", "Fasten seatbelts - ON", "No smoking - ON", "Fill the fuel tank", "Request ground services", "Request ATC clearance for taxi", "-----MCDU-----", "Copy GPS L", "SET IRS POS", "Complete route", "-----END OF MCDU-----", "Set TRIM", "F/D - ON", "Cruise speed - SET", "Cruise altitude - SET", "Autobrake - RTO", "Fuel pumps - ON", "APU Start + 3 Missisipis", "Preassure - SET", "ELEC2 & ELEC1 - ON", "Window heat - ON", "Probe heat - ON", "APU GEN", "Ground power - OFF", "QNH - SET", "L PACK & R PACK - AUTO", "Isolation valve - AUTO", "APU Bleed - ON", "Strobe Lights - ON", "Anti collision Lights - ON", "L PACK & R PACK - OFF", "ENG 2 START - GRD", "ENG 1 START - GRD", "FLAPS - SET", "ENG 2 START - CONT", "ENG 1 START - CONT", "GEN 1 & GEN 2 - ACT", "APU Switch - OFF", "L PACK & R PACK - AUTO", "APU Bleed - OFF", "YAW DAMPER - ON", "Retire ground services", "Request pushback", "Strobe Lights - ON", "Wing Lights - ON (If night)", "Auto Throtle - ARM", "Taxi Lights - ON"] },
+                    { title: "2. TAXI", items: ["Taxi to runway"] },
+                    { title: "3. PRE-TAKEOFF", items: ["Request ATC take off clearance", "TO Lights - ON"] },
+                    { title: "4. POST TAKE-OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF", "Autobrake - NORM"] },
+                    { title: "5. NAVIGATION", items: ["Fasten seatbelts - OFF", "Speed MACH - SET", "Continue navigation"] },
+                    { title: "6. APPROACH", items: ["ILS CONFIG - CHECK", "Fasten seatbelts - ON (at FL150 above landing)", "Reduce selected speed", "FLAPS - POSITION 4"] },
+                    { title: "7. FINAL APPROACH", items: ["CONTACT ATC - REQUEST LANDING", "COURSE - CHEK", "APPR - ON", "FLAPS - POSITION 5", "GEAR - DOWN", "Landing Lights - ON", "FLAPS - FULL", "Landing speed - CHECK (IAS 150 - 130 kts)", "SPOILERS ARM - CHECK", "FLAPS FULL - CHECK"] },
+                    { title: "8. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º", "SPOILERS - 0%"] },
+                    { title: "9. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU - CONECTED", "External power - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00000ft"] },
+                    { title: "10. FULL SHUTDOWN (IF NECESSARY)", items: ["External power - OFF", "BAT1 / BAT2 - OFF"] }
+                ]
+            },
+            b747: {
+                title: "Boeing 747",
+                sections: [
+                    { title: "1. ENERGIZATION", items: ["Battery - ON", "StdBy Power - AUTO", "External Power 1&2 - ON", "Interruptor APU START", "IRS L,R,C - NAV", "Emergency lights - ARM", "Fasten seatbelts - ON", "AntiICE (ALL) - AUTO", "Window & Heat - ON", "YAW dumper - ON", "Fill the fuel tank", "Wait APU Start", "APU Generators - ON", "APU Bleed - ON", "PACKs 1 & 2 & 3 - ON", "Request ATC clearance for taxi", "-----MCDU-----", "Complete route", "-----END OF MCDU-----", "NAV Lights - ON", "Strobe Lights - ON", "Wing Lights - ON (If night)", "Logo Lights - ON (If night)"] },
+                    { title: "2. PUSHBACK & ENGINE START", items: ["Hydraulic pumps - AUTO", "Fuel Pumps (Main) - ON", "X-Feed - OFF", "Beacon lights - BOTH", "PACKs 1 & 2 & 3 - OFF", "Request pushback", "Engine 4 - Extract overhead panel switch & wait", "Engine 4 Fuel Switch - ON", "Engine 3 - Extract overhead panel switch & wait", "Engine 3 Fuel Switch - ON", "Engine 2 - Extract overhead panel switch & wait", "Engine 2 Fuel Switch - ON", "Engine 1 - Extract overhead panel switch & wait", "Engine 1 Fuel Switch - ON", "Engine Bleed - ON", "APU Bleed - OFF", "PACKs 1 & 2 & 3 - ON", "APU Generators - OFF", "APU OFF"] },
+                    { title: "3. PRE-TAXI", items: ["TCAS - TA/RA", "Flaps - 10º", "Transponder - CHECK", "Autobrake - RTO", "QNH - SET", "Flight Director - ON", "AutoThrottle - ON", "Bank Angle - AUTO", "Starting altitude - SET", "Selected speed - SET", "RWY, TURN y TAXI Lights - ON"] },
+                    { title: "3. PRE-TAKEOFF", items: ["Request ATC take off clearance", "TO Lights - ON"] },
+                    { title: "4. POST TAKE-OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF", "Autobrake - NORM"] },
+                    { title: "5. NAVIGATION", items: ["Fasten seatbelts - OFF", "Speed MACH - SET", "Continue navigation"] },
+                    { title: "6. APPROACH", items: ["ILS CONFIG - CHECK", "Fasten seatbelts - ON (at FL150 above landing)", "Reduce selected speed", "FLAPS - POSITION 3"] },
+                    { title: "7. FINAL APPROACH", items: ["CONTACT ATC - REQUEST LANDING", "APPR - ON", "FLAPS - POSITION 4", "GEAR - DOWN", "Landing Lights - ON", "FLAPS - FULL", "Landing speed - CHECK (IAS 150 - 130 kts)", "SPOILERS ARM - CHECK", "FLAPS FULL - CHECK"] },
+                    { title: "8. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º", "SPOILERS - 0%"] },
+                    { title: "9. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU - CONECTED", "External power - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 / ENG3 / ENG4 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00000ft"] },
+                    { title: "10. FULL SHUTDOWN (IF NECESSARY)", items: ["External power - OFF", "BAT1 - OFF"] }
+                ]
+            },
+            c172: {
+                title: "Cessna 172 Skyhawk",
+                sections: [
+                    { title: "1. BEFORE START", items: ["Fuel Quantity - Checked", "Weight & Balance - Checked", "Doors - Closed", "Pilot Briefing - Complete"] },
+                    { title: "2. ENGINE START", items: ["Avionics - Off", "Fuel tank - Both", "Throttle - 10%", "Mixture - Full Lean (0%)", "Park Brakes - Set", "Standby battery - On, verify working", "Master switches - On", "Beacon Light - On", "Mixture - Full Rich (100%)", "Ignition - Start", "After engine catches; Ignition - Both", "Lights - As required", "Mixture - Lean for ground ops (80%)"] },
+                    { title: "3. PRE-TAXI/TAXI", items: ["Avionics - On", "Flaps - Up", "ATIS - Obtain", "Brakes - Test", "Taxi Clearance - Received (If active ATC)"] },
+                    { title: "4. RUN-UP", items: ["Brakes - Set", "Fuel tank - Both", "Trim - Set for takeoff", "Flight controls - free and correct", "Mixture - Best power (100% for normal elevation airports)", "Throttle - Increase to 1800 RPM", "Ignition - Right. Check RPM drop is no more than 150", "Ignition - Both", "Ignition - Left. Check RPM drop is no more than 150", "Ignition - Both", "Engine instruments - Checked", "Idle (575-625 RPM)", "Check engine stable", "Engine power - 10% (800+ RPM)"] },
+                    { title: "5. PRE-TAKEOFF", items: ["Flaps - 0-10", "Mixture - Best power", "Doors/Windows - Closed", "Landing Light - On", "Strobe Light - As required", "Abort plan - ready"] },
+                    { title: "6. TAKEOFF", items: ["Full throttle", "Rotate - 55 knots", "Climb speed - 72 knots", "Flaps - Up"] },
+                    { title: "7. CLIMB", items: ["70-85 knots", "Mixture - As req (100% for normal elevation airports)", "Displays - Checked"] },
+                    { title: "8. CRUISE", items: ["Mixture - Set for best fuel burn. 60-80%", "Power - 2200-2500 RPM"] },
+                    { title: "9. DESCENT", items: ["Mixture - Richen (100% for normal elevation airports)", "Fuel tank - Both", "ATIS - Obtain"] },
+                    { title: "10. PRE-LANDING", items: ["Landing Light - On", "Autopilot - Off", "Mixture - Best Power (100% for normal elevation airports)", "Fuel tank - both", "Flaps - as req"] },
+                    { title: "11. LANDING", items: ["Flaps - Full (Or as required)", "Approach speed - 65 knots", "-----Go-Around-----", "Power - Full", "Positive Rate climb", "Flaps - Retract slowly"] },
+                    { title: "12. AFTER LANDING", items: ["Flaps - Up", "Strobes - Off", "Landing light - As required", "Mixture - As required (Lean for ground ops)", "Trim - takeoff"] },
+                    { title: "13. ENGINE SHUT DOWN", items: ["Park Brake - On", "Avionics - Off", "Mixture - Full lean", "Ignition - Off", "Master Switches - Off", "Standby battery - Off", "Fuel Tank - Left or Right", "Lights - Off"] }
+                ]
+            },
+            cvjg2: {
+                title: "Cirrus Vision Jet SF50 G2",
+                sections: [
+                    { title: "1. PRE-FLIGHT", items: ["CAPS Safety Pin: Confirm REMOVED", "Parking Brake: SET", "Thrust Lever: IDLE", "BAT 1 & BAT 2: ON", "GEN 1 & GEN 2: ON", "Avionics / Garmin Touch Controller (GTC): Review menssages CAS", "Fuel Quantity / Balance: VERIFY", "Oxygen Master Switch: ON", "Lights: NAV / Beacon: ON"] },
+                    { title: "2. ENGINE START", items: ["Thrust Lever: IDLE", "Prop / Engine Area: CLEAR", "Engine Knob: RUN", "ENGINE START Button: PRESS", "Engine parameters (N2 / ITT / N1 / Oil Pressure): CHECK", "Parameters after start: N2 ~55-60%, Oil pressure GREEN", "Bleed Air / ECS Control Panel: Wait 2 min post-start and start (ON / AUTO)"] },
+                    { title: "3. PRE-TAXI/TAXI", items: ["Avionics & FMS: Configure route, cruisse altitude", "Altimeter / Transponder: SET / Standby or Auto", "Flaps: 50%", "Pitch Trim: SET for TO (~6° UP)", "Flight Controls: FREE & CORRECT", "Taxi Lights: ON", "Parking Brake: RELEASE"] },
+                    { title: "4. PRE-TAKEOFF", items: ["Brakes: HOLD", "Landing Lights / Strobe Lights: ON", "Probe Heat (Pitot): ON", "Engine IPS (Anti-Ice): If required", "Wing/Stab IPS: OFF / AS REQUIRED", "CAS Messages: CHECK"] },
+                    { title: "5. TAKEOFF", items: ["Thrust Level: FULL POWER / TO (100% N1)", "Airspeed (VR): 90 KIAS -> ROTATE", "Climb Rate: Positive -> GEAR UP", "Flaps (over 110 KIAS / 400 ft AGL): UP (0%)", "Thrust Level: CLIMB / MCL", "Autopilot: ENGAGE"] },
+                    { title: "6. CRUISE & DESCENT", items: ["Cruise Altitude / Speed: CHECK", "Pressurization / Cabin Altitude: MONITORIZE", "Altimeter on descent: CHECK", "Landing Lights: ON (under 10,000 ft)"] },
+                    { title: "7. APPROACH & LANDING", items: ["Seat Belts Sign: ON", "Engine / Wing IPS: AS REQUIRED", "Flaps (under 190 KIAS): 50%", "Landing Gear (under 210 KIAS): DOWN", "Flaps (under 150 KIAS): 100% (FULL)", "Target Speed", "Autopilot / Autothrottle: DISCONNECT (before touchdown)"] },
+                    { title: "8. AFTER LANDING & TAXI", items: ["Flaps: UP (0%)", "Landing Lights / Strobes: OFF", "Taxi Light: ON", "Probe Heat / IPS Systems: OFF", "Transponder: STBY / TAXI"] },
+                    { title: "9. SHUTDOWN & PARKING", items: ["Parking Brake: SET", "Taxi Light: OFF", "Bleed Air / Climate Control: OFF", "Engine Knob: STOP", "NAV / Beacon Lights: OFF", "GEN 1 & GEN 2: OFF", "BAT 1 & BAT 2: OFF"] }
+                ]
+            }
+        };
+
+        // ESTADO GLOBAL DE LA APLICACIÓN
+        let activeAircraftKey = null;
+        let currentSectionIndex = 0;
+        let checkedStates = {}; // Guarda qué checkboxes están marcados { 'a320-0-2': true }
+
+        function selectAircraft(key) {
+            activeAircraftKey = key;
+            currentSectionIndex = 0;
+            
+            // Actualizar vista
+            document.getElementById('main-menu').classList.remove('active');
+            document.getElementById('checklist-view').classList.add('active');
+            document.getElementById('hud-progress').style.display = 'flex';
+            document.getElementById('header-title').innerText = checklistsData[key].title;
+            
+            renderCurrentSection();
+        }
+
+        function showMenu() {
+            document.getElementById('checklist-view').classList.remove('active');
+            document.getElementById('main-menu').classList.add('active');
+            document.getElementById('hud-progress').style.display = 'none';
+            document.getElementById('header-title').innerText = "Command Center";
+        }
+
+        function renderCurrentSection() {
+            const data = checklistsData[activeAircraftKey];
+            const section = data.sections[currentSectionIndex];
+
+            // Paginador cabecera
+            document.getElementById('page-indicator').innerText = `BLOQUE ${currentSectionIndex + 1} DE ${data.sections.length}`;
+            document.getElementById('section-title').innerText = section.title;
+
+            const container = document.getElementById('items-container');
+            container.innerHTML = '';
+
+            // Generar items del bloque actual
+            section.items.forEach((itemText, itemIdx) => {
+                const itemKey = `${activeAircraftKey}-${currentSectionIndex}-${itemIdx}`;
+                const isChecked = !!checkedStates[itemKey];
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `checklist-item ${isChecked ? 'completed' : ''}`;
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = itemKey;
+                checkbox.checked = isChecked;
+
+                const label = document.createElement('label');
+                label.htmlFor = itemKey;
+                label.innerText = itemText;
+
+                itemDiv.appendChild(checkbox);
+                itemDiv.appendChild(label);
+
+                // Eventos de marcado
+                itemDiv.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                        checkbox.checked = !checkbox.checked;
+                    }
+                    checkedStates[itemKey] = checkbox.checked;
+                    itemDiv.classList.toggle('completed', checkbox.checked);
+                    updateGlobalProgress();
+                });
+
+                checkbox.addEventListener('change', () => {
+                    checkedStates[itemKey] = checkbox.checked;
+                    itemDiv.classList.toggle('completed', checkbox.checked);
+                    updateGlobalProgress();
+                });
+
+                container.appendChild(itemDiv);
+            });
+
+            // Botones Anterior / Siguiente
+            document.getElementById('prev-btn').disabled = (currentSectionIndex === 0);
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (currentSectionIndex === data.sections.length - 1) {
+                nextBtn.innerText = "FINALIZAR";
+            } else {
+                nextBtn.innerText = "SIGUIENTE \u2192";
+            }
+
+            updateGlobalProgress();
+        }
+
+        function changePage(delta) {
+            const data = checklistsData[activeAircraftKey];
+            const newIndex = currentSectionIndex + delta;
+
+            if (newIndex >= 0 && newIndex < data.sections.length) {
+                currentSectionIndex = newIndex;
+                renderCurrentSection();
+            } else if (newIndex >= data.sections.length) {
+                showMenu(); // Volver al menú tras completar el último bloque
+            }
+        }
+
+        function updateGlobalProgress() {
+            const data = checklistsData[activeAircraftKey];
+            let totalItems = 0;
+            let checkedItems = 0;
+
+            data.sections.forEach((sec, secIdx) => {
+                sec.items.forEach((_, itemIdx) => {
+                    totalItems++;
+                    const itemKey = `${activeAircraftKey}-${secIdx}-${itemIdx}`;
+                    if (checkedStates[itemKey]) {
+                        checkedItems++;
+                    }
+                });
+            });
+
+            const percentage = totalItems === 0 ? 0 : Math.round((checkedItems / totalItems) * 100);
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').textContent = `${percentage}%`;
+        }
+    </script>
+</body>
+</html>
