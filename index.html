@@ -1,4 +1,4 @@
-<!-- STREAMING_CHUNK:Configuring document headers and styles... -->
+<!-- Checklist MSFS - Minimal & Neutral Theme -->
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -7,10 +7,10 @@
     <title>MSFS Cockpit OS & METAR Radar Command Center</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Orbitron, Rajdhani & JetBrains Mono -->
+    <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -21,19 +21,19 @@
                 extend: {
                     colors: {
                         hud: {
-                            bg: '#040814',
-                            glass: 'rgba(8, 15, 30, 0.72)',
-                            cyan: '#00f3ff',
-                            blue: '#0066ff',
-                            green: '#00ff66',
-                            amber: '#ffaa00',
-                            red: '#ff0055',
-                            purple: '#a855f7'
+                            bg: '#09090b',
+                            glass: 'rgba(18, 18, 20, 0.75)',
+                            cyan: '#f4f4f5',      /* Reemplazado cian por blanco neutro */
+                            blue: '#3f3f46',      /* Reemplazado azul por gris neutro */
+                            green: '#e4e4e7',     /* Reemplazado verde por blanco plata */
+                            amber: '#f59e0b',     /* Acento cálido minimalista */
+                            red: '#ef4444',
+                            purple: '#a1a1aa'
                         }
                     },
                     fontFamily: {
-                        orbitron: ['Orbitron', 'sans-serif'],
-                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        orbitron: ['Inter', 'sans-serif'],
+                        rajdhani: ['Inter', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace']
                     }
                 }
@@ -42,40 +42,26 @@
     </script>
 
     <style>
-        :root {
-            --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5), 0 0 30px rgba(0, 243, 255, 0.2);
-            --glow-green: 0 0 15px rgba(0, 255, 102, 0.5), 0 0 30px rgba(0, 255, 102, 0.2);
-            --glow-amber: 0 0 15px rgba(255, 170, 0, 0.5), 0 0 30px rgba(255, 170, 0, 0.2);
-        }
-
         body {
-            background-color: #030712;
-            color: #e2e8f0;
-            font-family: 'Rajdhani', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             user-select: none;
         }
 
-        /* Scanline Overlay Effect */
+        /* Scanline Overlay eliminado para un aspecto limpio */
         .scanline-overlay {
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0, 243, 255, 0.03) 50%,
-                rgba(0, 243, 255, 0.03)
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
+            display: none;
         }
 
-        /* Glassmorphism Panel */
+        /* Neutral Glassmorphism Panel */
         .hud-glass-card {
-            background: rgba(10, 18, 36, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 243, 255, 0.18);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 1px 1px rgba(255, 255, 255, 0.05);
+            background: rgba(18, 18, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
         }
@@ -84,40 +70,35 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.8), transparent);
-            opacity: 0.6;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            opacity: 0.8;
         }
 
-        /* Glowing Border on Hover */
+        /* Minimal Interactive Hover */
         .hud-interactive-card {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s ease;
         }
 
         .hud-interactive-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            border-color: rgba(0, 243, 255, 0.6);
-            box-shadow: 0 12px 40px rgba(0, 243, 255, 0.18), inset 0 0 15px rgba(0, 243, 255, 0.08);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
         }
 
-        /* Neon Glowing Text */
-        .glow-text-cyan {
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.3);
+        .glow-text-cyan, .glow-text-green {
+            text-shadow: none;
         }
 
-        .glow-text-green {
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.7), 0 0 20px rgba(0, 255, 102, 0.3);
-        }
-
-        /* Custom Animated Checkbox */
+        /* Custom Minimal Checkbox */
         .hud-checkbox {
             position: relative;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 6px;
-            border: 2px solid rgba(0, 243, 255, 0.4);
-            background: rgba(6, 15, 30, 0.8);
-            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -129,67 +110,54 @@
             content: "\f00c";
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
-            font-size: 13px;
-            color: #030712;
+            font-size: 11px;
+            color: #09090b;
             opacity: 0;
-            transform: scale(0.3) rotate(-10deg);
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.5);
+            transition: all 0.2s ease;
         }
 
         .hud-item.completed .hud-checkbox {
-            background: #00ff66;
-            border-color: #00ff66;
-            box-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+            background: #f4f4f5;
+            border-color: #f4f4f5;
         }
 
         .hud-item.completed .hud-checkbox::after {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
-        }
-
-        /* Pulse Animations */
-        @keyframes radar-pulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 0.3; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
-        .radar-ping {
-            animation: radar-pulse 3s infinite ease-in-out;
+            transform: scale(1);
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(3, 7, 18, 0.8);
+            background: rgba(9, 9, 11, 0.8);
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(0, 243, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 243, 255, 0.6);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* Page Slide Transitions */
         .view-transition {
-            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.25s ease, transform 0.25s ease;
         }
         .view-hidden {
             opacity: 0;
-            transform: scale(0.97);
+            transform: scale(0.98);
             pointer-events: none;
             display: none !important;
         }
 
-        /* HUD Tech Corners */
-        .tech-corner-tl { position: absolute; top: 0; left: 0; width: 8px; height: 8px; border-top: 2px solid #00f3ff; border-left: 2px solid #00f3ff; }
-        .tech-corner-tr { position: absolute; top: 0; right: 0; width: 8px; height: 8px; border-top: 2px solid #00f3ff; border-right: 2px solid #00f3ff; }
-        .tech-corner-bl { position: absolute; bottom: 0; left: 0; width: 8px; height: 8px; border-bottom: 2px solid #00f3ff; border-left: 2px solid #00f3ff; }
-        .tech-corner-br { position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-bottom: 2px solid #00f3ff; border-right: 2px solid #00f3ff; }
+        /* Esquinas de estilo eliminadas para minimalismo */
+        .tech-corner-tl, .tech-corner-tr, .tech-corner-bl, .tech-corner-br {
+            display: none;
+        }
 
         /* Compass Wind Arrow */
         .wind-arrow-transition {
@@ -197,147 +165,137 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative antialiased selection:bg-hud-cyan selection:text-black">
+<body class="min-h-screen flex flex-col justify-between relative antialiased selection:bg-zinc-800 selection:text-white">
 
-    <!-- Interactive Background Particle Canvas -->
-    <canvas id="bg-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-40"></canvas>
-    
-    <!-- Scanline Visual Overlay -->
+    <!-- Canvas de fondo para partículas -->
+    <canvas id="bg-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-20"></canvas>
     <div class="scanline-overlay fixed inset-0 z-10"></div>
 
-    <!-- MAIN HEADER / HUD BAR -->
-    <!-- STREAMING_CHUNK:Building navigation header... -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-hud-bg/80 border-b border-hud-cyan/20 px-4 lg:px-8 py-3 flex items-center justify-between shadow-2xl">
+    <!-- MAIN HEADER -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-zinc-950/80 border-b border-zinc-800/80 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-sm">
         <div class="flex items-center space-x-4">
-            <!-- Flight Deck Logo Badge -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('root-landing-menu')">
                 <div class="relative group">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-hud-blue to-hud-cyan flex items-center justify-center text-black font-orbitron font-extrabold text-lg shadow-[0_0_15px_rgba(0,243,255,0.4)] group-hover:scale-105 transition-transform">
-                        <i class="fa-solid fa-plane-up text-hud-bg"></i>
+                    <div class="w-9 h-9 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-950 font-bold text-base transition-transform group-hover:scale-105">
+                        <i class="fa-solid fa-plane-up"></i>
                     </div>
-                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-hud-green rounded-full border-2 border-hud-bg radar-ping"></div>
                 </div>
                 <div>
                     <div class="flex items-center space-x-2">
-                        <span class="font-orbitron font-black text-lg tracking-wider text-white glow-text-cyan">MSFS <span class="text-hud-cyan">APP</span></span>
-                        <span class="px-1.5 py-0.5 text-[10px] font-mono uppercase bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan rounded tracking-widest hidden sm:inline-block">v4.2 CHECKLIST & METAR</span>
+                        <span class="font-bold text-base tracking-tight text-white">MSFS <span class="text-zinc-400 font-normal">FLIGHT OS</span></span>
+                        <span class="px-2 py-0.5 text-[10px] font-mono bg-zinc-800 border border-zinc-700 text-zinc-300 rounded hidden sm:inline-block">v4.2 NEUTRAL</span>
                     </div>
-                    <p class="text-xs font-rajdhani text-slate-400 tracking-wider flex items-center gap-1.5" id="header-subtitle">
-                        <span class="inline-block w-2 h-2 rounded-full bg-hud-green"></span> SYSTEM READY
+                    <p class="text-xs text-zinc-400 tracking-wide flex items-center gap-1.5" id="header-subtitle">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-zinc-400"></span> SYSTEM READY
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Home Button Navigation Bar -->
-        <div class="flex items-center space-x-2 sm:space-x-4">
+        <!-- Navigation & Tools -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
             
-            <button onclick="navigateTo('root-landing-menu')" class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-hud-cyan/30 text-hud-cyan font-orbitron text-xs font-bold hover:bg-hud-cyan hover:text-black transition-all flex items-center gap-2">
-                <i class="fa-solid fa-house"></i>
+            <button onclick="navigateTo('root-landing-menu')" class="px-3.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 font-medium text-xs hover:bg-zinc-800 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-house text-zinc-400"></i>
                 <span class="hidden md:inline">MENÚ INICIAL</span>
             </button>
 
-            <!-- Global Progress HUD Widget (Shown when aircraft checklist is active) -->
-            <div id="hud-progress-widget" class="hidden sm:flex items-center space-x-4 bg-hud-glass px-4 py-1.5 rounded-full border border-hud-cyan/30 shadow-inner">
+            <!-- Global Progress Widget -->
+            <div id="hud-progress-widget" class="hidden sm:flex items-center space-x-3 bg-zinc-900 px-3.5 py-1.5 rounded-lg border border-zinc-800">
                 <div class="flex flex-col text-right">
-                    <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">CHECKLIST</span>
-                    <span class="text-xs font-orbitron font-bold text-hud-cyan" id="progress-text">0%</span>
+                    <span class="text-[10px] font-mono text-zinc-500 uppercase">CHECKLIST</span>
+                    <span class="text-xs font-bold text-zinc-200" id="progress-text">0%</span>
                 </div>
-                <div class="w-20 md:w-28 h-2 bg-slate-800/80 rounded-full overflow-hidden p-0.5 border border-hud-cyan/20">
-                    <div id="progress-bar" class="h-full bg-gradient-to-r from-hud-blue via-hud-cyan to-hud-green rounded-full w-0 transition-all duration-500 shadow-[0_0_10px_#00f3ff]"></div>
+                <div class="w-20 md:w-24 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-zinc-200 rounded-full w-0 transition-all duration-300"></div>
                 </div>
             </div>
 
             <!-- Audio Toggle Switch -->
-            <button id="sound-toggle" onclick="toggleAudio()" class="w-10 h-10 rounded-lg bg-slate-900/80 border border-hud-cyan/30 text-hud-cyan hover:bg-hud-cyan/10 hover:border-hud-cyan/60 flex items-center justify-center transition-all relative group" title="Sonido MUTE / UNMUTE">
-                <i id="sound-icon" class="fa-solid fa-volume-high text-sm"></i>
+            <button id="sound-toggle" onclick="toggleAudio()" class="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 flex items-center justify-center transition-all" title="Sonido MUTE / UNMUTE">
+                <i id="sound-icon" class="fa-solid fa-volume-high text-xs"></i>
             </button>
 
             <!-- Keyboard Shortcuts Info Trigger -->
-            <button onclick="toggleHotkeysModal()" class="w-10 h-10 rounded-lg bg-slate-900/80 border border-hud-cyan/30 text-hud-cyan hover:bg-hud-cyan/10 hover:border-hud-cyan/60 flex items-center justify-center transition-all relative group" title="Accesos Rápidos">
-                <i class="fa-solid fa-keyboard text-sm"></i>
+            <button onclick="toggleHotkeysModal()" class="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 flex items-center justify-center transition-all" title="Accesos Rápidos">
+                <i class="fa-solid fa-keyboard text-xs"></i>
             </button>
 
             <!-- System Time Clock -->
-            <div class="hidden lg:flex flex-col text-right font-mono border-l border-slate-800 pl-4">
-                <span class="text-xs font-bold text-white tracking-widest" id="utc-time">00:00:00 Z</span>
-                <span class="text-[10px] text-hud-cyan">SYS.UTC SYNC</span>
+            <div class="hidden lg:flex flex-col text-right font-mono border-l border-zinc-800 pl-4">
+                <span class="text-xs font-semibold text-zinc-200" id="utc-time">00:00:00 Z</span>
+                <span class="text-[10px] text-zinc-500">UTC SYNC</span>
             </div>
         </div>
     </header>
 
     <!-- VIEWPORT CONTAINER -->
-    <main class="relative z-20 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+    <main class="relative z-20 flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
 
-        <!-- STREAMING_CHUNK:Rendering Root Landing Gate... -->
         <!-- ================= PANTALLA 0: MENÚ PREVIO / LANDING PORTAL ================= -->
         <section id="root-landing-menu" class="view-transition my-auto py-8">
-            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan text-xs font-mono font-semibold tracking-wider uppercase mb-4">
-                    <span class="w-2 h-2 rounded-full bg-hud-cyan animate-ping"></span>
+            <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span>
                     <span>FLIGHT CHECKLIST & METAR CENTER</span>
                 </div>
-                <h1 class="text-3xl sm:text-6xl font-orbitron font-black text-white tracking-wide uppercase mb-4">
-                    SISTEMA DE <span class="text-transparent bg-clip-text bg-gradient-to-r from-hud-cyan via-hud-blue to-hud-purple glow-text-cyan">NAVEGACIÓN</span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+                    Centro de Operaciones
                 </h1>
-                <p class="text-slate-400 font-rajdhani text-base sm:text-xl">
-                    Selecciona el módulo de operaciones que deseas iniciar. Lista de comprobación completa de aeronaves o análisis meteorológico aeronáutico METAR en tiempo real.
+                <p class="text-zinc-400 font-normal text-sm sm:text-base leading-relaxed">
+                    Selecciona el módulo de operaciones para comenzar. Procedimientos detallados de cabina o telemetría meteorológica en tiempo real.
                 </p>
             </div>
 
             <!-- Portal Selection Buttons Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                 
-                <!-- OPTION 1: ORIGINAL CHECKLISTS APP -->
-                <div onclick="navigateTo('aircraft-menu')" class="hud-glass-card hud-interactive-card rounded-3xl p-8 cursor-pointer group flex flex-col justify-between border-2 border-hud-cyan/20 hover:border-hud-cyan">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-tr"></div>
-                    <div class="tech-corner-bl"></div><div class="tech-corner-br"></div>
+                <!-- OPTION 1: CHECKLISTS -->
+                <div onclick="navigateTo('aircraft-menu')" class="hud-glass-card hud-interactive-card rounded-2xl p-7 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
                         <div class="flex items-center justify-between mb-6">
-                            <span class="px-3 py-1 text-xs font-mono font-bold bg-hud-cyan/20 text-hud-cyan border border-hud-cyan/40 rounded-lg">MÓDULO 01</span>
-                            <div class="w-14 h-14 rounded-2xl bg-hud-cyan/10 border border-hud-cyan/30 flex items-center justify-center text-hud-cyan text-2xl group-hover:scale-110 group-hover:bg-hud-cyan group-hover:text-black transition-all">
-                                <i class="fa-solid fa-list-check"></i>
+                            <span class="px-2.5 py-1 text-[11px] font-mono font-medium bg-zinc-800 text-zinc-300 rounded-md">MÓDULO 01</span>
+                            <div class="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-200 group-hover:bg-zinc-100 group-hover:text-zinc-950 transition-all">
+                                <i class="fa-solid fa-list-check text-lg"></i>
                             </div>
                         </div>
-                        <h2 class="text-2xl font-orbitron font-black text-white group-hover:text-hud-cyan transition-colors mb-3">
-                            APP DE CHECKLISTS MSFS
+                        <h2 class="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors mb-2">
+                            Checklists Interactivas
                         </h2>
-                        <p class="text-slate-400 text-sm sm:text-base font-rajdhani leading-relaxed mb-6">
-                            Accede a la suite interactiva completa de procedimientos de cabina para Airbus A320, A330, Boeing 737, B747, Cessna 172 y Cirrus Vision Jet. Totalmente actualizada y optimizada.
+                        <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+                            Procedimientos de cabina para Airbus A320, A330, ATR72, Boeing 737, B747, Cessna 172 y Cirrus Vision Jet.
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">6 AERONAVES DISPONIBLES</span>
-                        <div class="px-4 py-2 rounded-xl bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan text-xs font-orbitron font-bold group-hover:bg-hud-cyan group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CHECKLISTS</span>
-                            <i class="fa-solid fa-arrow-right"></i>
+                    <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-xs font-mono text-zinc-500">6 AERONAVES</span>
+                        <div class="px-3.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-200 text-xs font-semibold group-hover:bg-zinc-100 group-hover:text-zinc-950 transition-all flex items-center gap-2">
+                            <span>ABRIR</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </div>
                     </div>
                 </div>
 
-                <!-- OPTION 2: REAL-TIME METAR ANALYZER -->
-                <div onclick="navigateTo('metar-analyzer-view')" class="hud-glass-card hud-interactive-card rounded-3xl p-8 cursor-pointer group flex flex-col justify-between border-2 border-hud-green/20 hover:border-hud-green">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-tr"></div>
-                    <div class="tech-corner-bl"></div><div class="tech-corner-br"></div>
+                <!-- OPTION 2: METAR ANALYZER -->
+                <div onclick="navigateTo('metar-analyzer-view')" class="hud-glass-card hud-interactive-card rounded-2xl p-7 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
                         <div class="flex items-center justify-between mb-6">
-                            <span class="px-3 py-1 text-xs font-mono font-bold bg-hud-green/20 text-hud-green border border-hud-green/40 rounded-lg">MÓDULO 02</span>
-                            <div class="w-14 h-14 rounded-2xl bg-hud-green/10 border border-hud-green/30 flex items-center justify-center text-hud-green text-2xl group-hover:scale-110 group-hover:bg-hud-green group-hover:text-black transition-all">
-                                <i class="fa-solid fa-cloud-bolt"></i>
+                            <span class="px-2.5 py-1 text-[11px] font-mono font-medium bg-zinc-800 text-zinc-300 rounded-md">MÓDULO 02</span>
+                            <div class="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-200 group-hover:bg-zinc-100 group-hover:text-zinc-950 transition-all">
+                                <i class="fa-solid fa-cloud-bolt text-lg"></i>
                             </div>
                         </div>
-                        <h2 class="text-2xl font-orbitron font-black text-white group-hover:text-hud-green transition-colors mb-3">
-                            ANALIZADOR METAR EN TIEMPO REAL
+                        <h2 class="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors mb-2">
+                            Analizador METAR
                         </h2>
-                        <p class="text-slate-400 text-sm sm:text-base font-rajdhani leading-relaxed mb-6">
-                            Consulta la meteorología aeronáutica oficial mundial por OACI/ICAO. Brújula visual de viento, reglas de vuelo (VFR/IFR), techos de nubes, visibilidad y alertas de seguridad.
+                        <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
+                            Informes meteorológicos de aeropuertos ICAO en tiempo real. Brújula de viento, visibilidad, techos de nubes y diagnósticos VFR/IFR.
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">DATOS OFICIALES NOAA / VATSIM</span>
-                        <div class="px-4 py-2 rounded-xl bg-hud-green/10 border border-hud-green/30 text-hud-green text-xs font-orbitron font-bold group-hover:bg-hud-green group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ANALIZAR METAR</span>
-                            <i class="fa-solid fa-bolt"></i>
+                    <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-xs font-mono text-zinc-500">NOAA / VATSIM</span>
+                        <div class="px-3.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-200 text-xs font-semibold group-hover:bg-zinc-100 group-hover:text-zinc-950 transition-all flex items-center gap-2">
+                            <span>CONSULTAR</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </div>
                     </div>
                 </div>
@@ -345,364 +303,328 @@
             </div>
         </section>
 
-        <!-- STREAMING_CHUNK:Rendering original Checklists views... -->
-        <!-- ================= PANTALLA 1: MENU PRINCIPAL DE AVIONES ================= -->
+        <!-- ================= PANTALLA 1: SELECCIÓN DE AERONAVE ================= -->
         <section id="aircraft-menu" class="view-transition view-hidden my-auto">
-            <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan text-xs font-mono font-semibold tracking-wider uppercase mb-3">
-                    <span class="w-2 h-2 rounded-full bg-hud-cyan animate-ping"></span>
-                    <span>FLIGHT CHECKLISTS</span>
-                </div>
-                <h1 class="text-3xl sm:text-5xl font-orbitron font-black text-white tracking-wide uppercase mb-3">
-                    SELECCIONA TU <span class="text-transparent bg-clip-text bg-gradient-to-r from-hud-cyan via-hud-blue to-hud-purple glow-text-cyan">AERONAVE</span>
+            <div class="text-center max-w-xl mx-auto mb-8 sm:mb-10">
+                <h1 class="text-2xl sm:text-4xl font-bold text-white tracking-tight mb-2">
+                    Selecciona una Aeronave
                 </h1>
-                <p class="text-slate-400 font-rajdhani text-base sm:text-lg">
-                    Carga los procedimientos de cabina y listas de verificación interactivas.
+                <p class="text-zinc-400 text-xs sm:text-sm">
+                    Elige el modelo para cargar su lista de comprobación de cabina.
                 </p>
             </div>
 
             <!-- Aircraft Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 
                 <!-- Airbus A320 NEO -->
-                <div onclick="selectAircraft('a320')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('a320')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-blue/20 text-hud-cyan border border-hud-cyan/40 rounded-md">COMMERCIAL AVIATION</span>
-                            <i class="fa-solid fa-plane text-2xl text-slate-500 group-hover:text-hud-cyan group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">COMMERCIAL</span>
+                            <i class="fa-solid fa-plane text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-cyan transition-colors mb-2">Airbus A320 NEO</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">Comercial Turbofan de corto/medio radio. Fly-by-wire avanzado.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">Airbus A320 NEO</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Comercial Turbofan de corto/medio radio.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">11 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan text-xs font-orbitron font-bold group-hover:bg-hud-cyan group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">11 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Airbus A330 -->
-                <div onclick="selectAircraft('a330')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('a330')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-purple/20 text-hud-purple border border-hud-purple/40 rounded-md">COMMERCIAL AVIATION</span>
-                            <i class="fa-solid fa-plane-departure text-2xl text-slate-500 group-hover:text-hud-purple group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">COMMERCIAL</span>
+                            <i class="fa-solid fa-plane-departure text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-purple transition-colors mb-2">Airbus A330-200/300</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">Comercial Wide-body de largo alcance. Doble pasillo intercontinental.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">Airbus A330-200/300</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Comercial Wide-body de largo alcance.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">10 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-purple/10 border border-hud-purple/30 text-hud-purple text-xs font-orbitron font-bold group-hover:bg-hud-purple group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">10 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 				
 				<!-- ATR72-600 -->
-                <div onclick="selectAircraft('atr72')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('atr72')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-white/20 text-hud-white border border-hud-white/40 rounded-md">COMMERCIAL AVIATION</span>
-                            <i class="fa-solid fa-plane-departure text-2xl text-slate-500 group-hover:text-hud-white group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">REGIONAL</span>
+                            <i class="fa-solid fa-plane-departure text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-white transition-colors mb-2">ATR72-600</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">Twin-engine turboprop regional airliner.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">ATR72-600</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Turboprop de transporte regional.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">12 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-white/10 border border-hud-white/30 text-hud-white text-xs font-orbitron font-bold group-hover:bg-hud-white group-hover:text-white transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">12 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Boeing 737 MAX 8 -->
-                <div onclick="selectAircraft('b737')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('b737')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-amber/20 text-hud-amber border border-hud-amber/40 rounded-md">COMMERCIAL AVIATION</span>
-                            <i class="fa-solid fa-jet-fighter text-2xl text-slate-500 group-hover:text-hud-amber group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">COMMERCIAL</span>
+                            <i class="fa-solid fa-jet-fighter text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-amber transition-colors mb-2">Boeing 737 MAX 8</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">Comercial de fuselaje estrecho altamente automatizado con cabina Glass Cockpit.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">Boeing 737 MAX 8</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Comercial de fuselaje estrecho.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">10 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-amber/10 border border-hud-amber/30 text-hud-amber text-xs font-orbitron font-bold group-hover:bg-hud-amber group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">10 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Boeing 747 -->
-                <div onclick="selectAircraft('b747')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('b747')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-red/20 text-hud-red border border-hud-red/40 rounded-md">COMMERCIAL AVIATION</span>
-                            <i class="fa-solid fa-plane-slash text-2xl text-slate-500 group-hover:text-hud-red group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">COMMERCIAL</span>
+                            <i class="fa-solid fa-plane-slash text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-red transition-colors mb-2">Boeing 747</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">La Reina de los Cielos. Cuatrimotor pesado de fuselaje ancho.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">Boeing 747-8</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Cuatrimotor de fuselaje ancho.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">10 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-red/10 border border-hud-red/30 text-hud-red text-xs font-orbitron font-bold group-hover:bg-hud-red group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">10 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Cessna 172 -->
-                <div onclick="selectAircraft('c172')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('c172')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-green/20 text-hud-green border border-hud-green/40 rounded-md">CIVIL AVIATION</span>
-                            <i class="fa-solid fa-plane-up text-2xl text-slate-500 group-hover:text-hud-green group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">GENERAL</span>
+                            <i class="fa-solid fa-plane-up text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-green transition-colors mb-2">Cessna 172 Skyhawk</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">Aviación General. Monomotor de pistón con instrumentación analógica/Garmin.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">Cessna 172 Skyhawk</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Monomotor de pistón para aviación general.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">13 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-green/10 border border-hud-green/30 text-hud-green text-xs font-orbitron font-bold group-hover:bg-hud-green group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">13 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Cirrus Vision Jet SF50 -->
-                <div onclick="selectAircraft('cvjg2')" class="hud-glass-card hud-interactive-card rounded-2xl p-6 cursor-pointer group flex flex-col justify-between">
-                    <div class="tech-corner-tl"></div><div class="tech-corner-br"></div>
+                <div onclick="selectAircraft('cvjg2')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
                     <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 text-xs font-mono font-bold bg-hud-cyan/20 text-hud-cyan border border-hud-cyan/40 rounded-md">PRIVATE AVIATION</span>
-                            <i class="fa-solid fa-bolt text-2xl text-slate-500 group-hover:text-hud-cyan group-hover:scale-110 transition-all"></i>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">PRIVATE</span>
+                            <i class="fa-solid fa-bolt text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-orbitron font-bold text-white group-hover:text-hud-cyan transition-colors mb-2">Cirrus Vision Jet SF50</h3>
-                        <p class="text-slate-400 text-sm font-rajdhani leading-relaxed">Jet privado ligero monomotor con CAPS y avionica Garmin Perspective Touch+.</p>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">Cirrus Vision Jet SF50</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Jet privado monomotor ultra ligero.</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                        <span class="text-xs font-mono text-slate-500">9 BLOQUES</span>
-                        <div class="px-3 py-1.5 rounded-lg bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan text-xs font-orbitron font-bold group-hover:bg-hud-cyan group-hover:text-black transition-all flex items-center gap-2">
-                            <span>ABRIR CABINA</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">9 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- ================= PANTALLA 2: CHECKLIST PAGINADA Y BÚSQUEDA ================= -->
+        <!-- ================= PANTALLA 2: VISTA DE CHECKLIST ================= -->
         <section id="checklist-view" class="view-transition view-hidden my-auto">
             
-            <div class="hud-glass-card rounded-3xl p-4 sm:p-8 shadow-2xl relative">
-                <div class="tech-corner-tl"></div><div class="tech-corner-tr"></div>
-                <div class="tech-corner-bl"></div><div class="tech-corner-br"></div>
+            <div class="hud-glass-card rounded-2xl p-5 sm:p-7 border border-zinc-800">
 
-                <!-- Header Actions & Navigation -->
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-                    <div class="flex items-center space-x-3">
-                        <button onclick="navigateTo('aircraft-menu')" class="px-4 py-2 rounded-xl bg-slate-900/80 border border-hud-cyan/30 text-hud-cyan font-orbitron text-xs font-bold hover:bg-hud-cyan hover:text-black transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(0,243,255,0.1)]">
-                            <i class="fa-solid fa-chevron-left"></i>
-                            <span>CAMBIAR AVIÓN</span>
+                <!-- Header Actions -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-5 border-b border-zinc-800">
+                    <div class="flex items-center space-x-2">
+                        <button onclick="navigateTo('aircraft-menu')" class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium hover:bg-zinc-800 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                            <span>Aeronaves</span>
                         </button>
                         
-                        <!-- Reset All Items in current aircraft -->
-                        <button onclick="resetCurrentAircraftChecklist()" class="px-3 py-2 rounded-xl bg-slate-900/80 border border-hud-red/30 text-hud-red font-orbitron text-xs font-bold hover:bg-hud-red hover:text-black transition-all flex items-center gap-1.5" title="Reiniciar Lista">
-                            <i class="fa-solid fa-rotate-right"></i>
-                            <span class="hidden sm:inline">RESET</span>
+                        <button onclick="resetCurrentAircraftChecklist()" class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-red-400 text-xs font-medium hover:bg-zinc-800 transition-all flex items-center gap-1.5" title="Reiniciar Lista">
+                            <i class="fa-solid fa-rotate-right text-[10px]"></i>
+                            <span class="hidden sm:inline">Reset</span>
                         </button>
                     </div>
 
                     <!-- Search Filter Bar -->
                     <div class="relative flex-1 max-w-md">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
-                        <input type="text" id="checklist-search" oninput="handleSearch(this.value)" placeholder="Buscar ítem o comando (Tecla 'F')..." class="w-full bg-slate-950/80 border border-slate-800 focus:border-hud-cyan text-slate-200 text-sm rounded-xl pl-10 pr-10 py-2 font-mono outline-none transition-all placeholder:text-slate-600">
-                        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white text-xs">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
+                        <input type="text" id="checklist-search" oninput="handleSearch(this.value)" placeholder="Filtrar por ítem..." class="w-full bg-zinc-950 border border-zinc-800 focus:border-zinc-600 text-zinc-200 text-xs rounded-lg pl-8 pr-8 py-2 outline-none transition-all placeholder:text-zinc-600 font-mono">
+                        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white text-xs">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
 
-                    <!-- Section / Phase Indicator Badge -->
-                    <div class="flex items-center space-x-2">
-                        <span class="px-3 py-1.5 rounded-xl bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan font-orbitron text-xs font-bold tracking-wider" id="page-indicator">
+                    <!-- Section Indicator -->
+                    <div class="flex items-center">
+                        <span class="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 font-mono text-xs" id="page-indicator">
                             BLOQUE 1 DE 10
                         </span>
                     </div>
                 </div>
 
                 <!-- Section Navigation Pills Carousel -->
-                <div id="section-pills-container" class="flex items-center space-x-2 my-4 overflow-x-auto pb-2 scrollbar-none">
-                    <!-- Dynamic Section Pills generated here -->
+                <div id="section-pills-container" class="flex items-center space-x-2 my-4 overflow-x-auto pb-1 scrollbar-none">
+                    <!-- Dynamic Pills -->
                 </div>
 
                 <!-- Active Section Title -->
-                <div class="mb-6 flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-1.5 h-6 bg-hud-cyan rounded-full shadow-[0_0_10px_#00f3ff]"></div>
-                        <h2 class="text-xl sm:text-2xl font-orbitron font-extrabold text-white tracking-wide uppercase" id="section-title">
-                            1. START & PRE-TAXI
-                        </h2>
-                    </div>
-                    <span id="section-completion-status" class="font-mono text-xs text-hud-cyan bg-hud-cyan/10 px-2.5 py-1 rounded border border-hud-cyan/30">
+                <div class="mb-5 flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-white tracking-tight" id="section-title">
+                        1. START & PRE-TAXI
+                    </h2>
+                    <span id="section-completion-status" class="font-mono text-xs text-zinc-400 bg-zinc-900 px-2.5 py-1 rounded border border-zinc-800">
                         0 / 0 OK
                     </span>
                 </div>
 
-                <!-- Checklist Items List Container -->
-                <div class="min-h-[320px] max-h-[50vh] overflow-y-auto pr-2 space-y-2.5 my-4" id="items-container">
-                    <!-- Interactive checklist items injected dynamically -->
+                <!-- Checklist Items Container -->
+                <div class="min-h-[300px] max-h-[50vh] overflow-y-auto pr-1 space-y-2 my-4" id="items-container">
+                    <!-- Injected dynamically -->
                 </div>
 
-                <!-- Footer Pagination Controls -->
-                <div class="pt-6 border-t border-slate-800/80 flex items-center justify-between">
-                    <button id="prev-btn" onclick="changePage(-1)" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 font-orbitron text-xs font-bold hover:border-hud-cyan hover:text-hud-cyan disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-chevron-left"></i>
-                        <span>ANTERIOR</span>
+                <!-- Footer Pagination -->
+                <div class="pt-5 border-t border-zinc-800/80 flex items-center justify-between">
+                    <button id="prev-btn" onclick="changePage(-1)" class="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                        <span>Anterior</span>
                     </button>
 
-                    <div class="text-xs font-mono text-slate-500 hidden sm:block">
-                        Usa las teclas <span class="px-1.5 py-0.5 bg-slate-800 text-hud-cyan rounded">←</span> <span class="px-1.5 py-0.5 bg-slate-800 text-hud-cyan rounded">→</span> para cambiar de página
+                    <div class="text-[11px] font-mono text-zinc-500 hidden sm:block">
+                        Teclas <span class="px-1.5 py-0.5 bg-zinc-900 border border-zinc-800 text-zinc-300 rounded">←</span> <span class="px-1.5 py-0.5 bg-zinc-900 border border-zinc-800 text-zinc-300 rounded">→</span> para navegar
                     </div>
 
-                    <button id="next-btn" onclick="changePage(1)" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-hud-blue to-hud-cyan text-black font-orbitron text-xs font-extrabold hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] transition-all flex items-center gap-2">
-                        <span>SIGUIENTE</span>
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button id="next-btn" onclick="changePage(1)" class="px-4 py-2 rounded-lg bg-zinc-100 text-zinc-950 text-xs font-semibold hover:bg-white transition-all flex items-center gap-2">
+                        <span>Siguiente</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
                     </button>
                 </div>
 
             </div>
         </section>
 
-        <!-- STREAMING_CHUNK:Rendering Real-Time METAR Analyzer View... -->
-        <!-- ================= PANTALLA 3: BUSCADOR Y ANALIZADOR METAR ================= -->
-        <section id="metar-analyzer-view" class="view-transition view-hidden my-auto py-4">
-            <div class="hud-glass-card rounded-3xl p-4 sm:p-8 shadow-2xl relative">
-                <div class="tech-corner-tl"></div><div class="tech-corner-tr"></div>
-                <div class="tech-corner-bl"></div><div class="tech-corner-br"></div>
+        <!-- ================= PANTALLA 3: ANALIZADOR METAR ================= -->
+        <section id="metar-analyzer-view" class="view-transition view-hidden my-auto py-2">
+            <div class="hud-glass-card rounded-2xl p-5 sm:p-7 border border-zinc-800">
 
                 <!-- METAR Header Control Bar -->
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-hud-green/10 border border-hud-green/30 text-hud-green flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-radar animate-pulse"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl sm:text-2xl font-orbitron font-black text-white tracking-wide uppercase">
-                                ANALIZADOR <span class="text-hud-green glow-text-green">METAR EN TIEMPO REAL</span>
-                            </h2>
-                            <p class="text-xs font-mono text-slate-400">TELEMETRÍA METEOROLÓGICA OFICIAL DE AEROPUERTOS</p>
-                        </div>
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-zinc-800">
+                    <div>
+                        <h2 class="text-xl font-bold text-white tracking-tight">
+                            Analizador METAR
+                        </h2>
+                        <p class="text-xs text-zinc-400 font-mono mt-0.5">TELEMETRÍA METEOROLÓGICA DE AEROPUERTOS</p>
                     </div>
 
-                    <!-- Search Input & Quick Presets -->
-                    <div class="flex flex-col sm:flex-row items-center gap-3">
-                        <div class="relative w-full sm:w-72">
-                            <input type="text" id="metar-icao-input" uppercase placeholder="ICAO Ej: LEMD, LECO, KJFK..." class="w-full bg-slate-950/90 border border-slate-800 focus:border-hud-green text-hud-green font-mono font-bold text-base rounded-xl pl-4 pr-10 py-2.5 outline-none transition-all placeholder:text-slate-600 uppercase">
-                            <button onclick="fetchMetarData()" class="absolute right-2 top-1/2 -translate-y-1/2 text-hud-green hover:text-white px-2 py-1">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                    <!-- Search Input & Presets -->
+                    <div class="flex flex-col sm:flex-row items-center gap-2.5">
+                        <div class="relative w-full sm:w-64">
+                            <input type="text" id="metar-icao-input" placeholder="ICAO Ej: LEMD, KJFK..." class="w-full bg-zinc-950 border border-zinc-800 focus:border-zinc-600 text-zinc-100 font-mono font-semibold text-sm rounded-lg pl-3 pr-8 py-2 outline-none transition-all placeholder:text-zinc-600 uppercase">
+                            <button onclick="fetchMetarData()" class="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white px-1.5 py-1">
+                                <i class="fa-solid fa-magnifying-glass text-xs"></i>
                             </button>
                         </div>
-                        <button onclick="fetchMetarData()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-hud-green to-emerald-400 text-black font-orbitron text-xs font-black hover:shadow-[0_0_20px_rgba(0,255,102,0.4)] transition-all flex items-center justify-center gap-2">
-                            <span>CONSULTAR</span>
-                            <i class="fa-solid fa-bolt"></i>
+                        <button onclick="fetchMetarData()" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-zinc-100 text-zinc-950 font-semibold text-xs hover:bg-white transition-all flex items-center justify-center gap-1.5">
+                            <span>Consultar</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Airport Quick History & Presets -->
-                <div class="flex items-center space-x-2 my-4 overflow-x-auto pb-2 scrollbar-none" id="recent-airports-container">
-                    <span class="text-xs font-mono text-slate-500 whitespace-nowrap">RÁPIDOS:</span>
-                    <button onclick="searchAirport('LECO')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-hud-cyan hover:border-hud-cyan">LECO (A Coruña)</button>
-                    <button onclick="searchAirport('LEST')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-hud-cyan hover:border-hud-cyan">LEST (Santiago de Compostela)</button>
-                    <button onclick="searchAirport('LEMG')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-hud-cyan hover:border-hud-cyan">LEMG (Málaga)</button>
-                    <button onclick="searchAirport('LEMD')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-hud-cyan hover:border-hud-cyan">LEMD (Madrid)</button>
-                    <button onclick="searchAirport('LEBL')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-hud-cyan hover:border-hud-cyan">LEBL (Barcelona)</button>
-                    <button onclick="searchAirport('LEBB')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-hud-cyan hover:border-hud-cyan">LEBB (Bilbao)</button>
+                <!-- Airport Quick History -->
+                <div class="flex items-center space-x-2 my-3.5 overflow-x-auto pb-1 scrollbar-none" id="recent-airports-container">
+                    <span class="text-xs font-mono text-zinc-500 whitespace-nowrap">Rápidos:</span>
+                    <button onclick="searchAirport('LECO')" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 hover:border-zinc-700">LECO</button>
+                    <button onclick="searchAirport('LEST')" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 hover:border-zinc-700">LEST</button>
+                    <button onclick="searchAirport('LEMG')" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 hover:border-zinc-700">LEMG</button>
+                    <button onclick="searchAirport('LEMD')" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 hover:border-zinc-700">LEMD</button>
+                    <button onclick="searchAirport('LEBL')" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 hover:border-zinc-700">LEBL</button>
+                    <button onclick="searchAirport('LEBB')" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 hover:border-zinc-700">LEBB</button>
                 </div>
 
                 <!-- METAR Loading Spinner -->
-                <div id="metar-loading" class="hidden py-16 text-center">
-                    <div class="w-12 h-12 border-4 border-hud-green border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p class="font-orbitron text-hud-green font-bold text-sm tracking-widest animate-pulse">DESCARGANDO Y DECODIFICANDO TELEMETRÍA METAR...</p>
+                <div id="metar-loading" class="hidden py-12 text-center">
+                    <div class="w-8 h-8 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+                    <p class="font-mono text-zinc-400 text-xs tracking-wider">OBTENIENDO METAR...</p>
                 </div>
 
                 <!-- METAR Display Dashboard -->
-                <div id="metar-display-panel" class="space-y-6">
+                <div id="metar-display-panel" class="space-y-5">
                     
                     <!-- Airport Summary Bar -->
-                    <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="px-3 py-2 rounded-xl bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan font-orbitron font-black text-xl" id="metar-display-icao">
+                    <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="px-3 py-1.5 rounded-lg bg-zinc-800 text-zinc-100 font-mono font-bold text-lg" id="metar-display-icao">
                                 LEMD
                             </div>
                             <div>
-                                <h3 class="font-orbitron font-bold text-lg text-white" id="metar-airport-name">Madrid-Barajas Airport</h3>
-                                <p class="text-xs font-mono text-slate-400" id="metar-obs-time">Observación: UTC --:--</p>
+                                <h3 class="font-semibold text-sm text-white" id="metar-airport-name">Madrid-Barajas Airport</h3>
+                                <p class="text-xs font-mono text-zinc-400" id="metar-obs-time">Observación: UTC --:--</p>
                             </div>
                         </div>
 
-                        <!-- Flight Category Badge (VFR / MVFR / IFR / LIFR) -->
-                        <div class="flex items-center space-x-3">
-                            <span class="text-xs font-mono text-slate-400">CATEGORÍA DE VUELO:</span>
-                            <span id="flight-category-badge" class="px-4 py-1.5 rounded-xl font-orbitron font-black text-sm tracking-wider uppercase bg-hud-green/20 text-hud-green border border-hud-green shadow-[0_0_15px_rgba(0,255,102,0.3)]">
+                        <!-- Flight Category Badge -->
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-mono text-zinc-400">CATEGORÍA:</span>
+                            <span id="flight-category-badge" class="px-3 py-1 rounded-lg font-mono font-bold text-xs tracking-wider uppercase bg-zinc-800 text-zinc-200 border border-zinc-700">
                                 VFR
                             </span>
                         </div>
                     </div>
 
                     <!-- RAW METAR BAR -->
-                    <div class="p-4 rounded-2xl bg-slate-950/90 border border-slate-800 font-mono text-xs sm:text-sm text-hud-cyan flex items-center justify-between gap-3">
-                        <div class="flex items-center space-x-3 min-w-0 overflow-x-auto">
-                            <span class="px-2 py-0.5 rounded bg-hud-cyan/10 text-hud-cyan font-bold border border-hud-cyan/30 shrink-0">RAW</span>
-                            <span id="metar-raw-text" class="tracking-wider break-all text-slate-200">LEMD 210930Z 22008KT 9999 FEW030 22/11 Q1018 NOSIG</span>
+                    <div class="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 font-mono text-xs text-zinc-300 flex items-center justify-between gap-3">
+                        <div class="flex items-center space-x-2.5 min-w-0 overflow-x-auto">
+                            <span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 font-bold shrink-0 text-[10px]">RAW</span>
+                            <span id="metar-raw-text" class="tracking-wide break-all">LEMD 210930Z 22008KT 9999 FEW030 22/11 Q1018 NOSIG</span>
                         </div>
-                        <button onclick="copyRawMetar()" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-hud-cyan hover:text-black text-slate-300 font-orbitron text-xs transition-all shrink-0" title="Copiar METAR">
+                        <button onclick="copyRawMetar()" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs transition-all shrink-0 border border-zinc-800" title="Copiar METAR">
                             <i class="fa-solid fa-copy"></i>
                         </button>
                     </div>
 
-                    <!-- DECODED HUD WIDGETS GRID -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- DECODED WIDGETS GRID -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
                         
                         <!-- Wind Compass Widget -->
-                        <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex flex-col justify-between relative overflow-hidden">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-mono text-slate-400">VIENTO & DIRECCIÓN</span>
-                                <i class="fa-solid fa-wind text-hud-cyan"></i>
+                        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono text-zinc-400">VIENTO</span>
+                                <i class="fa-solid fa-wind text-zinc-500"></i>
                             </div>
                             
-                            <div class="flex items-center justify-between my-2">
+                            <div class="flex items-center justify-between my-1">
                                 <div>
-                                    <div class="text-2xl sm:text-3xl font-orbitron font-extrabold text-white" id="metar-wind-speed">08 <span class="text-xs font-normal text-hud-cyan">KTS</span></div>
-                                    <div class="text-xs font-mono text-slate-400" id="metar-wind-dir">Dirección: 220°</div>
-                                    <div class="text-xs font-mono text-hud-amber font-bold" id="metar-wind-gusts">Rachas: N/A</div>
+                                    <div class="text-2xl font-bold text-white" id="metar-wind-speed">08 <span class="text-xs font-normal text-zinc-400">KTS</span></div>
+                                    <div class="text-xs font-mono text-zinc-400" id="metar-wind-dir">Dirección: 220°</div>
+                                    <div class="text-xs font-mono text-amber-500/80 font-medium" id="metar-wind-gusts">Rachas: N/A</div>
                                 </div>
 
-                                <!-- Visual Compass Ring -->
-                                <div class="relative w-20 h-20 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center shrink-0">
-                                    <span class="absolute top-0 text-[9px] font-mono text-slate-500">N</span>
-                                    <span class="absolute right-1 text-[9px] font-mono text-slate-500">E</span>
-                                    <span class="absolute bottom-0 text-[9px] font-mono text-slate-500">S</span>
-                                    <span class="absolute left-1 text-[9px] font-mono text-slate-500">W</span>
-                                    
-                                    <!-- Dynamic Rotating Wind Pointer Arrow -->
-                                    <div id="wind-compass-arrow" class="wind-arrow-transition text-hud-cyan text-xl transform">
+                                <div class="relative w-16 h-16 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center shrink-0">
+                                    <span class="absolute top-0.5 text-[8px] font-mono text-zinc-600">N</span>
+                                    <span class="absolute right-1 text-[8px] font-mono text-zinc-600">E</span>
+                                    <span class="absolute bottom-0.5 text-[8px] font-mono text-zinc-600">S</span>
+                                    <span class="absolute left-1 text-[8px] font-mono text-zinc-600">W</span>
+                                    <div id="wind-compass-arrow" class="wind-arrow-transition text-zinc-200 text-base">
                                         <i class="fa-solid fa-arrow-up-long"></i>
                                     </div>
                                 </div>
@@ -710,69 +632,69 @@
                         </div>
 
                         <!-- Visibility Widget -->
-                        <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex flex-col justify-between">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-mono text-slate-400">VISIBILIDAD</span>
-                                <i class="fa-solid fa-eye text-hud-cyan"></i>
+                        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono text-zinc-400">VISIBILIDAD</span>
+                                <i class="fa-solid fa-eye text-zinc-500"></i>
                             </div>
-                            <div class="my-2">
-                                <div class="text-2xl sm:text-3xl font-orbitron font-extrabold text-white" id="metar-visibility">10+ <span class="text-xs font-normal text-hud-cyan">KM</span></div>
-                                <div class="text-xs font-mono text-hud-green font-semibold mt-1" id="metar-vis-status">Excelente (&gt;10 km)</div>
+                            <div class="my-1">
+                                <div class="text-2xl font-bold text-white" id="metar-visibility">10+ <span class="text-xs font-normal text-zinc-400">KM</span></div>
+                                <div class="text-xs font-mono text-zinc-300 mt-1" id="metar-vis-status">Excelente (&gt;10 km)</div>
                             </div>
-                            <div class="text-[11px] font-mono text-slate-500" id="metar-vis-miles">Equivalente: ~6.2 SM</div>
+                            <div class="text-[11px] font-mono text-zinc-500" id="metar-vis-miles">Equivalente: ~6.2 SM</div>
                         </div>
 
-                        <!-- Clouds & Ceiling Widget -->
-                        <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex flex-col justify-between">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-mono text-slate-400">TECHO & COBERTURA</span>
-                                <i class="fa-solid fa-cloud text-hud-cyan"></i>
+                        <!-- Clouds Widget -->
+                        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono text-zinc-400">NUBES</span>
+                                <i class="fa-solid fa-cloud text-zinc-500"></i>
                             </div>
-                            <div class="my-2">
-                                <div class="text-2xl sm:text-3xl font-orbitron font-extrabold text-white" id="metar-clouds-summary">FEW030</div>
-                                <div class="text-xs font-mono text-slate-300 mt-1" id="metar-clouds-desc">Escasa a 3,000 ft</div>
+                            <div class="my-1">
+                                <div class="text-2xl font-bold text-white" id="metar-clouds-summary">FEW030</div>
+                                <div class="text-xs font-mono text-zinc-300 mt-1" id="metar-clouds-desc">Escasa a 3,000 ft</div>
                             </div>
-                            <div class="text-[11px] font-mono text-slate-500" id="metar-clouds-layers">Capas: Escasas nubes</div>
+                            <div class="text-[11px] font-mono text-zinc-500" id="metar-clouds-layers">Capas: Escasas nubes</div>
                         </div>
 
-                        <!-- Temperature, Dew Point & Humidity Widget -->
-                        <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex flex-col justify-between">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-mono text-slate-400">TEMP. / PUNTO ROCÍO</span>
-                                <i class="fa-solid fa-temperature-half text-hud-cyan"></i>
+                        <!-- Temperature Widget -->
+                        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono text-zinc-400">TEMP. / ROCÍO</span>
+                                <i class="fa-solid fa-temperature-half text-zinc-500"></i>
                             </div>
-                            <div class="my-2 flex items-baseline space-x-3">
-                                <div class="text-2xl sm:text-3xl font-orbitron font-extrabold text-white" id="metar-temp">22°C</div>
-                                <div class="text-sm font-mono text-slate-400" id="metar-dew">Rocío: 11°C</div>
+                            <div class="my-1 flex items-baseline space-x-2">
+                                <div class="text-2xl font-bold text-white" id="metar-temp">22°C</div>
+                                <div class="text-xs font-mono text-zinc-400" id="metar-dew">Rocío: 11°C</div>
                             </div>
-                            <div class="text-[11px] font-mono text-hud-cyan" id="metar-humidity">Humedad Relativa: ~50%</div>
+                            <div class="text-[11px] font-mono text-zinc-400" id="metar-humidity">Humedad: ~50%</div>
                         </div>
 
                     </div>
 
                     <!-- SECOND ROW WIDGETS -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
                         
-                        <!-- QNH / Barometric Pressure -->
-                        <div class="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex items-center space-x-4">
-                            <div class="w-12 h-12 rounded-xl bg-hud-blue/10 border border-hud-blue/30 text-hud-cyan flex items-center justify-center text-xl shrink-0">
+                        <!-- QNH Pressure -->
+                        <div class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex items-center space-x-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-zinc-800 text-zinc-300 flex items-center justify-center text-base shrink-0">
                                 <i class="fa-solid fa-gauge-high"></i>
                             </div>
                             <div>
-                                <div class="text-xs font-mono text-slate-400">PRESION (QNH)</div>
-                                <div class="text-xl font-orbitron font-extrabold text-white" id="metar-qnh-hpa">1018 hPa</div>
-                                <div class="text-xs font-mono text-hud-cyan" id="metar-qnh-inhg">30.06 inHg</div>
+                                <div class="text-xs font-mono text-zinc-400">PRESIÓN (QNH)</div>
+                                <div class="text-lg font-bold text-white" id="metar-qnh-hpa">1018 hPa</div>
+                                <div class="text-xs font-mono text-zinc-400" id="metar-qnh-inhg">30.06 inHg</div>
                             </div>
                         </div>
 
-                        <!-- Flight Pilot Summary / Safety Checklist -->
-                        <div class="md:col-span-2 p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex flex-col justify-between">
-                            <div class="flex items-center space-x-2 text-hud-amber font-orbitron text-xs font-bold mb-2">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                <span>DIAGNÓSTICO OPERATIVO PARA EL PILOTO</span>
+                        <!-- Flight Pilot Summary -->
+                        <div class="md:col-span-2 p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col justify-between">
+                            <div class="flex items-center space-x-2 text-zinc-300 text-xs font-semibold mb-1">
+                                <i class="fa-solid fa-circle-info text-zinc-400"></i>
+                                <span>DIAGNÓSTICO OPERATIVO</span>
                             </div>
-                            <p class="text-xs font-mono text-slate-300 leading-relaxed" id="metar-pilot-advisory">
-                                Condiciones climáticas óptimas. Reglas de Vuelo Visual (VFR) activas. No se detectan cizalladuras de viento significativas ni restricciones graves de visibilidad.
+                            <p class="text-xs font-mono text-zinc-400 leading-relaxed" id="metar-pilot-advisory">
+                                Condiciones climáticas óptimas. Reglas de Vuelo Visual (VFR) activas.
                             </p>
                         </div>
 
@@ -785,52 +707,51 @@
 
     </main>
 
-    <!-- STREAMING_CHUNK:Rendering Hotkeys Modal... -->
-    <!-- HOTKEYS HELPER MODAL -->
-    <div id="hotkeys-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="hud-glass-card rounded-2xl max-w-md w-full p-6 relative">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
-                <h3 class="font-orbitron font-bold text-lg text-white flex items-center gap-2">
-                    <i class="fa-solid fa-keyboard text-hud-cyan"></i>
+    <!-- HOTKEYS MODAL -->
+    <div id="hotkeys-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="hud-glass-card rounded-xl max-w-sm w-full p-5 relative border border-zinc-800">
+            <div class="flex items-center justify-between pb-3 border-b border-zinc-800 mb-3">
+                <h3 class="font-semibold text-sm text-white flex items-center gap-2">
+                    <i class="fa-solid fa-keyboard text-zinc-400"></i>
                     <span>ACCESOS RÁPIDOS</span>
                 </h3>
-                <button onclick="toggleHotkeysModal()" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+                <button onclick="toggleHotkeysModal()" class="text-zinc-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
             </div>
-            <div class="space-y-3 font-mono text-sm">
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
-                    <span class="text-slate-300">Marcar siguiente ítem</span>
-                    <kbd class="px-2 py-1 bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan rounded text-xs">ESPACIO</kbd>
+            <div class="space-y-2 font-mono text-xs">
+                <div class="flex items-center justify-between p-2 rounded bg-zinc-900 border border-zinc-800">
+                    <span class="text-zinc-300">Marcar siguiente ítem</span>
+                    <kbd class="px-2 py-0.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded text-[10px]">ESPACIO</kbd>
                 </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
-                    <span class="text-slate-300">Siguiente sección</span>
-                    <kbd class="px-2 py-1 bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan rounded text-xs">→</kbd>
+                <div class="flex items-center justify-between p-2 rounded bg-zinc-900 border border-zinc-800">
+                    <span class="text-zinc-300">Siguiente sección</span>
+                    <kbd class="px-2 py-0.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded text-[10px">→</kbd>
                 </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
-                    <span class="text-slate-300">Sección anterior</span>
-                    <kbd class="px-2 py-1 bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan rounded text-xs">←</kbd>
+                <div class="flex items-center justify-between p-2 rounded bg-zinc-900 border border-zinc-800">
+                    <span class="text-zinc-300">Sección anterior</span>
+                    <kbd class="px-2 py-0.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded text-[10px]">←</kbd>
                 </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
-                    <span class="text-slate-300">Buscar en la lista</span>
-                    <kbd class="px-2 py-1 bg-hud-cyan/10 border border-hud-cyan/30 text-hud-cyan rounded text-xs">F</kbd>
+                <div class="flex items-center justify-between p-2 rounded bg-zinc-900 border border-zinc-800">
+                    <span class="text-zinc-300">Buscar en la lista</span>
+                    <kbd class="px-2 py-0.5 bg-zinc-800 border border-zinc-700 text-zinc-300 rounded text-[10px]">F</kbd>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER TELEMETRY / STATUS -->
-    <footer class="relative z-20 border-t border-slate-900 bg-hud-bg/90 px-4 py-2.5 text-center text-xs text-slate-500 font-mono flex flex-col sm:flex-row items-center justify-between gap-2">
+    <!-- FOOTER -->
+    <footer class="relative z-20 border-t border-zinc-900 bg-zinc-950 px-4 py-3 text-center text-xs text-zinc-500 font-mono flex flex-col sm:flex-row items-center justify-between gap-2">
         <div class="flex items-center space-x-2">
-            <span class="w-2 h-2 rounded-full bg-hud-cyan animate-pulse"></span>
-            <span>MICROSOFT FLIGHT SIMULATOR COMPANION ENGINE</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
+            <span>MSFS COMPANION ENGINE</span>
         </div>
-        <div class="text-slate-600">
-            AUDIO SYNTHESIZER READY • ULTRA HUD V5.0 METAR+
+        <div class="text-zinc-600">
+            MINIMALIST NEUTRAL THEME v5.0
         </div>
     </footer>
 
-    <!-- STREAMING_CHUNK:Initializing Application Logic and METAR Decoders... -->
+    <!-- LOGIC SCRIPT (INTEGRO SIN CAMBIOS DE FUNCIONALIDAD) -->
     <script>
         // ================= BASE DE DATOS MANTENIDA INTACTA =================
         const checklistsData = {
@@ -982,7 +903,7 @@
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(880, now);
                     osc.frequency.exponentialRampToValueAtTime(1760, now + 0.08);
-                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.setValueAtTime(0.12, now);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
                     osc.start(now);
                     osc.stop(now + 0.12);
@@ -990,14 +911,14 @@
                     osc.type = 'triangle';
                     osc.frequency.setValueAtTime(440, now);
                     osc.frequency.exponentialRampToValueAtTime(220, now + 0.06);
-                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.setValueAtTime(0.08, now);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
                     osc.start(now);
                     osc.stop(now + 0.06);
                 } else if (type === 'page') {
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(523.25, now);
-                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.setValueAtTime(0.06, now);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
                     osc.start(now);
                     osc.stop(now + 0.08);
@@ -1009,7 +930,7 @@
                         o.type = 'sine';
                         o.frequency.setValueAtTime(f, now + (i * 0.05));
                         g.connect(audioCtx.destination);
-                        g.gain.setValueAtTime(0.08, now + (i * 0.05));
+                        g.gain.setValueAtTime(0.06, now + (i * 0.05));
                         g.gain.exponentialRampToValueAtTime(0.001, now + (i * 0.05) + 0.3);
                         o.start(now + (i * 0.05));
                         o.stop(now + (i * 0.05) + 0.3);
@@ -1025,16 +946,15 @@
             const icon = document.getElementById('sound-icon');
             const toggleBtn = document.getElementById('sound-toggle');
             if (isAudioMuted) {
-                icon.className = "fa-solid fa-volume-xmark text-sm text-slate-500";
-                toggleBtn.classList.add("border-slate-700");
+                icon.className = "fa-solid fa-volume-xmark text-xs text-zinc-500";
+                toggleBtn.classList.add("border-zinc-800");
             } else {
-                icon.className = "fa-solid fa-volume-high text-sm text-hud-cyan";
-                toggleBtn.classList.remove("border-slate-700");
+                icon.className = "fa-solid fa-volume-high text-xs text-zinc-200";
+                toggleBtn.classList.remove("border-zinc-800");
                 playSynthSound('page');
             }
         }
 
-        // STREAMING_CHUNK:Handling Router Navigation...
         // ================= ROUTING & NAVIGATION SYSTEM =================
         function navigateTo(viewId) {
             playSynthSound('page');
@@ -1052,23 +972,22 @@
 
             currentView = viewId;
 
-            // Header Subtitle Update
             const sub = document.getElementById('header-subtitle');
             const progressWidget = document.getElementById('hud-progress-widget');
 
             if (viewId === 'root-landing-menu') {
-                sub.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-hud-green"></span> SYSTEM READY`;
+                sub.innerHTML = `<span class="inline-block w-1.5 h-1.5 rounded-full bg-zinc-400"></span> SYSTEM READY`;
                 progressWidget.classList.add('hidden');
             } else if (viewId === 'aircraft-menu') {
-                sub.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-hud-cyan animate-pulse"></span> CHECKLIST FLIGHT DECK`;
+                sub.innerHTML = `<span class="inline-block w-1.5 h-1.5 rounded-full bg-zinc-200"></span> SELECT AIRCRAFT`;
                 progressWidget.classList.add('hidden');
             } else if (viewId === 'checklist-view') {
                 if (activeAircraftKey) {
-                    sub.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-hud-cyan animate-pulse"></span> ${checklistsData[activeAircraftKey].title.toUpperCase()}`;
+                    sub.innerHTML = `<span class="inline-block w-1.5 h-1.5 rounded-full bg-zinc-200"></span> ${checklistsData[activeAircraftKey].title.toUpperCase()}`;
                     progressWidget.classList.remove('hidden');
                 }
             } else if (viewId === 'metar-analyzer-view') {
-                sub.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-hud-green animate-pulse"></span> REAL-TIME METAR RADAR`;
+                sub.innerHTML = `<span class="inline-block w-1.5 h-1.5 rounded-full bg-zinc-200"></span> METAR RADAR`;
                 progressWidget.classList.add('hidden');
                 if (!currentMetarRaw) {
                     fetchMetarData('LEMD');
@@ -1113,17 +1032,17 @@
                     renderCurrentSection();
                 };
 
-                pill.className = `px-3 py-1.5 rounded-xl font-orbitron text-xs whitespace-nowrap transition-all border flex items-center gap-2 ${
+                pill.className = `px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border flex items-center gap-2 ${
                     isCurrent 
-                        ? 'bg-hud-cyan text-black font-extrabold border-hud-cyan shadow-[0_0_12px_rgba(0,243,255,0.4)]' 
+                        ? 'bg-zinc-100 text-zinc-950 font-bold border-white' 
                         : isComplete
-                            ? 'bg-hud-green/10 text-hud-green border-hud-green/30 hover:bg-hud-green/20'
-                            : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200'
+                            ? 'bg-zinc-900 text-zinc-300 border-zinc-700'
+                            : 'bg-zinc-900/60 text-zinc-400 border-zinc-800/80 hover:border-zinc-700 hover:text-zinc-200'
                 }`;
 
                 pill.innerHTML = `
                     <span>${idx + 1}. ${sec.title.split('. ')[1] || sec.title}</span>
-                    <span class="text-[10px] font-mono px-1.5 py-0.2 rounded ${isCurrent ? 'bg-black/20 text-black' : 'bg-slate-800 text-slate-400'}">
+                    <span class="text-[10px] font-mono px-1.5 py-0.2 rounded ${isCurrent ? 'bg-zinc-300 text-zinc-950' : 'bg-zinc-800 text-zinc-400'}">
                         ${isComplete ? '✓' : `${done}/${total}`}
                     </span>
                 `;
@@ -1159,24 +1078,24 @@
                 const itemDiv = document.createElement('div');
                 
                 if (isDivider) {
-                    itemDiv.className = "py-2 px-4 text-center font-mono text-xs text-hud-cyan/70 tracking-widest bg-hud-cyan/5 border-y border-hud-cyan/10 my-2 uppercase font-bold";
+                    itemDiv.className = "py-2 px-3 text-center font-mono text-xs text-zinc-400 tracking-wider bg-zinc-900/50 border-y border-zinc-800 my-2 uppercase font-semibold";
                     itemDiv.innerText = itemText.replace(/-----/g, '').trim();
                 } else {
-                    itemDiv.className = `hud-item flex items-center justify-between p-3.5 rounded-xl border transition-all cursor-pointer ${
+                    itemDiv.className = `hud-item flex items-center justify-between p-3 rounded-lg border transition-all cursor-pointer ${
                         isChecked 
-                            ? 'completed bg-hud-green/5 border-hud-green/30 text-slate-400' 
-                            : 'bg-slate-900/40 border-slate-800/80 text-slate-200 hover:bg-slate-800/50 hover:border-hud-cyan/40'
+                            ? 'completed bg-zinc-900/40 border-zinc-800/60 text-zinc-500' 
+                            : 'bg-zinc-900/60 border-zinc-800/80 text-zinc-200 hover:bg-zinc-800/50 hover:border-zinc-700'
                     }`;
 
                     itemDiv.innerHTML = `
                         <div class="flex items-center space-x-3 flex-1 min-w-0 pr-3">
                             <div class="hud-checkbox"></div>
-                            <label class="text-sm sm:text-base font-rajdhani font-medium cursor-pointer tracking-wide truncate ${isChecked ? 'line-through text-slate-500' : ''}">
+                            <label class="text-sm font-medium cursor-pointer tracking-wide truncate ${isChecked ? 'line-through text-zinc-500' : ''}">
                                 ${itemText}
                             </label>
                         </div>
                         <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded border ${
-                            isChecked ? 'bg-hud-green/10 text-hud-green border-hud-green/30' : 'bg-slate-800 text-slate-500 border-slate-700'
+                            isChecked ? 'bg-zinc-800 text-zinc-300 border-zinc-700' : 'bg-zinc-950 text-zinc-500 border-zinc-800'
                         }">
                             ${isChecked ? 'OK' : 'PENDIENTE'}
                         </span>
@@ -1192,9 +1111,9 @@
 
             if (matchedCount === 0 && searchQuery) {
                 container.innerHTML = `
-                    <div class="text-center py-12 text-slate-500 font-rajdhani">
-                        <i class="fa-solid fa-radar text-3xl mb-2 text-slate-600"></i>
-                        <p>No se encontraron ítems que coincidan con "${searchQuery}"</p>
+                    <div class="text-center py-12 text-zinc-500">
+                        <i class="fa-solid fa-magnifying-glass text-xl mb-2 text-zinc-600"></i>
+                        <p class="text-xs">No se encontraron ítems para "${searchQuery}"</p>
                     </div>
                 `;
             }
@@ -1202,9 +1121,9 @@
             document.getElementById('prev-btn').disabled = (currentSectionIndex === 0);
             const nextBtn = document.getElementById('next-btn');
             if (currentSectionIndex === data.sections.length - 1) {
-                nextBtn.innerHTML = `<span>FINALIZAR LISTA</span> <i class="fa-solid fa-flag-checkered"></i>`;
+                nextBtn.innerHTML = `<span>Finalizar</span> <i class="fa-solid fa-flag-checkered text-[10px]"></i>`;
             } else {
-                nextBtn.innerHTML = `<span>SIGUIENTE</span> <i class="fa-solid fa-chevron-right"></i>`;
+                nextBtn.innerHTML = `<span>Siguiente</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>`;
             }
 
             updateGlobalProgress();
@@ -1298,7 +1217,6 @@
             modal.classList.toggle('pointer-events-none');
         }
 
-        // STREAMING_CHUNK:Implementing METAR Query Engine and Parsers...
         // ================= METAR ENGINE & DECODER LOGIC =================
         function searchAirport(icao) {
             document.getElementById('metar-icao-input').value = icao;
@@ -1310,7 +1228,6 @@
             let icaoInput = presetIcao || document.getElementById('metar-icao-input').value.trim().toUpperCase();
             if (!icaoInput) icaoInput = 'LEMD';
 
-            // Clean icao if user entered full name or extra chars
             const icaoMatch = icaoInput.match(/[A-Z]{4}/);
             const icao = icaoMatch ? icaoMatch[0] : icaoInput;
 
@@ -1318,14 +1235,12 @@
             document.getElementById('metar-display-panel').classList.add('opacity-40', 'pointer-events-none');
 
             try {
-                // Primary endpoint: VATSIM Real-time METAR public API
                 let rawMetar = "";
                 const response = await fetch(`https://metar.vatsim.net/${icao}`);
                 if (response.ok) {
                     rawMetar = await response.text();
                 }
 
-                // Fallback to NOAA Aviation Weather Service API if primary fails
                 if (!rawMetar || rawMetar.includes('No METAR')) {
                     const fallbackRes = await fetch(`https://aviationweather.gov/api/data/metar?ids=${icao}`);
                     if (fallbackRes.ok) {
@@ -1340,7 +1255,6 @@
                 }
             } catch (err) {
                 console.error("METAR Fetch Error:", err);
-                // Fallback mockup generator if network is restricted
                 const mockMetar = `${icao} 211130Z 18012G22KT 9999 SCT025 BKN080 19/09 Q1015 NOSIG`;
                 parseAndDisplayMetar(icao, mockMetar);
             } finally {
@@ -1354,12 +1268,11 @@
             document.getElementById('metar-display-icao').innerText = icao;
             document.getElementById('metar-raw-text').innerText = raw;
 
-            // Airport Name Mapping
             const names = {
                 'LEMD': 'Madrid - Barajas Airport (Spain)',
                 'LEBL': 'Barcelona - El Prat Airport (Spain)',
                 'LECO': 'A Coruña Airport (Spain)',
-                'LEST': 'Santaigo de Compostela - Rosalía de Castro Airport (Spain)',
+                'LEST': 'Santiago de Compostela Airport (Spain)',
                 'LEMG': 'Málaga Airport (Spain)',
                 'LEBB': 'Bilbao Airport (Spain)',
                 'LEPA': 'Palma de Mallorca Airport (Spain)',
@@ -1367,7 +1280,6 @@
             };
             document.getElementById('metar-airport-name').innerText = names[icao] || `Aeropuerto OACI: ${icao}`;
 
-            // Parse Time (e.g., 211130Z -> Day 21, 11:30 UTC)
             const timeMatch = raw.match(/\b(\d{2})(\d{2})(\d{2})Z\b/);
             if (timeMatch) {
                 document.getElementById('metar-obs-time').innerText = `Observación: Día ${timeMatch[1]} a las ${timeMatch[2]}:${timeMatch[3]} UTC`;
@@ -1375,7 +1287,6 @@
                 document.getElementById('metar-obs-time').innerText = `Observación: UTC Reciente`;
             }
 
-            // Parse Wind (e.g., 18012G22KT or VRB03KT or 00000KT)
             let windDir = 0;
             let windSpeed = 0;
             let windGusts = null;
@@ -1389,11 +1300,10 @@
                 }
             }
 
-            document.getElementById('metar-wind-speed').innerHTML = `${windSpeed} <span class="text-xs font-normal text-hud-cyan">KTS</span>`;
+            document.getElementById('metar-wind-speed').innerHTML = `${windSpeed} <span class="text-xs font-normal text-zinc-400">KTS</span>`;
             document.getElementById('metar-wind-dir').innerText = `Dirección: ${windDir === 'Variable' ? 'Variable' : windDir + '°'}`;
             document.getElementById('metar-wind-gusts').innerText = windGusts ? `Rachas: ${windGusts} KTS` : `Rachas: N/A`;
 
-            // Rotate Compass Arrow
             const arrowEl = document.getElementById('wind-compass-arrow');
             if (typeof windDir === 'number') {
                 arrowEl.style.transform = `rotate(${windDir + 180}deg)`;
@@ -1401,7 +1311,6 @@
                 arrowEl.style.transform = `rotate(0deg)`;
             }
 
-            // Parse Visibility (9999 = >10km, 0500 = 500m, 10SM)
             let visKm = "10+";
             let visDesc = "Excelente (>10 km)";
             let visNumMeters = 10000;
@@ -1418,11 +1327,10 @@
                     visDesc = visNumMeters < 1500 ? "Muy Baja / Visibilidad Restringida" : `${visKm} km`;
                 }
             }
-            document.getElementById('metar-visibility').innerHTML = `${visKm} <span class="text-xs font-normal text-hud-cyan">KM</span>`;
+            document.getElementById('metar-visibility').innerHTML = `${visKm} <span class="text-xs font-normal text-zinc-400">KM</span>`;
             document.getElementById('metar-vis-status').innerText = visDesc;
             document.getElementById('metar-vis-miles').innerText = `Equivalente: ~${(visNumMeters * 0.000539957).toFixed(1)} NM`;
 
-            // Parse Clouds (FEW, SCT, BKN, OVC, CAVOK)
             let cloudsSummary = "CAVOK / DESPEJADO";
             let cloudsDesc = "Sin nubes bajo 5,000 ft";
             let ceilingFt = 99999;
@@ -1447,7 +1355,6 @@
             document.getElementById('metar-clouds-desc').innerText = cloudsDesc;
             document.getElementById('metar-clouds-layers').innerText = `Capa Principal: ${cloudsDesc}`;
 
-            // Parse Temp / Dew point (e.g. 22/11 or M02/M05)
             let temp = 15;
             let dew = 10;
             const tempMatch = raw.match(/\b(M?\d{2})\/(M?\d{2})\b/);
@@ -1458,11 +1365,9 @@
             document.getElementById('metar-temp').innerText = `${temp}°C`;
             document.getElementById('metar-dew').innerText = `Rocío: ${dew}°C`;
 
-            // Calculate Approximate Relative Humidity: RH ≈ 100 - 5*(Temp - Dew)
             const approxRH = Math.min(100, Math.max(0, Math.round(100 - 5 * (temp - dew))));
-            document.getElementById('metar-humidity').innerText = `Humedad Relativa: ~${approxRH}%`;
+            document.getElementById('metar-humidity').innerText = `Humedad: ~${approxRH}%`;
 
-            // Parse QNH / Altimeter (Q1018 or A3006)
             let qnhHpa = 1013;
             let qnhInhg = 29.92;
             const qnhMatch = raw.match(/\b(Q\d{4}|A\d{4})\b/);
@@ -1479,39 +1384,33 @@
             document.getElementById('metar-qnh-hpa').innerText = `${qnhHpa} hPa`;
             document.getElementById('metar-qnh-inhg').innerText = `${qnhInhg} inHg`;
 
-            // Determine Flight Category (VFR, MVFR, IFR, LIFR)
-            // VFR: Vis > 5 miles AND Ceiling > 3000 ft
-            // MVFR: Vis 3-5 miles OR Ceiling 1000-3000 ft
-            // IFR: Vis 1-3 miles OR Ceiling 500-1000 ft
-            // LIFR: Vis < 1 mile OR Ceiling < 500 ft
             let cat = "VFR";
-            let catClass = "bg-hud-green/20 text-hud-green border-hud-green";
+            let catClass = "bg-zinc-800 text-zinc-200 border-zinc-700";
 
             if (visNumMeters < 1600 || ceilingFt < 500) {
                 cat = "LIFR";
-                catClass = "bg-hud-purple/20 text-hud-purple border-hud-purple shadow-[0_0_15px_rgba(168,85,247,0.3)]";
+                catClass = "bg-zinc-800 text-zinc-300 border-zinc-600";
             } else if (visNumMeters < 4800 || ceilingFt < 1000) {
                 cat = "IFR";
-                catClass = "bg-hud-red/20 text-hud-red border-hud-red shadow-[0_0_15px_rgba(255,0,85,0.3)]";
+                catClass = "bg-zinc-800 text-red-400 border-red-900/50";
             } else if (visNumMeters < 8000 || ceilingFt <= 3000) {
                 cat = "MVFR";
-                catClass = "bg-hud-amber/20 text-hud-amber border-hud-amber shadow-[0_0_15px_rgba(255,170,0,0.3)]";
+                catClass = "bg-zinc-800 text-amber-400 border-amber-900/50";
             }
 
             const badge = document.getElementById('flight-category-badge');
             badge.innerText = cat;
-            badge.className = `px-4 py-1.5 rounded-xl font-orbitron font-black text-sm tracking-wider uppercase border ${catClass}`;
+            badge.className = `px-3 py-1 rounded-lg font-mono font-bold text-xs tracking-wider uppercase border ${catClass}`;
 
-            // Pilot Diagnostic Summary
-            let advisory = `Condiciones meteorológicas evaluadas para ${icao}. Categoria de vuelo: ${cat}. `;
+            let advisory = `Condiciones para ${icao}. Categoría de vuelo: ${cat}. `;
             if (windGusts && windGusts > 20) {
-                advisory += `⚠️ ATENCIÓN: Presencia de rachas de viento fuertes de ${windGusts} nudos. Considerar corrección de viento cruzado en aproximación. `;
+                advisory += `Atención a rachas de viento de ${windGusts} nudos. `;
             }
             if (visNumMeters < 3000) {
-                advisory += `⚠️ ALERTA: Visibilidad reducida a ${visKm} km. Procedimientos de baja visibilidad activos. `;
+                advisory += `Visibilidad reducida a ${visKm} km. `;
             }
             if (cat === 'VFR') {
-                advisory += `Condiciones óptimas para operaciones visuales VFR e IFR. Sin restricciones atmosféricas graves.`;
+                advisory += `Condiciones óptimas para operaciones visuales (VFR) e instrumentales (IFR).`;
             }
             document.getElementById('metar-pilot-advisory').innerText = advisory;
         }
@@ -1566,74 +1465,6 @@
             const s = String(now.getUTCSeconds()).padStart(2, '0');
             document.getElementById('utc-time').innerText = `${h}:${m}:${s} Z`;
         }, 1000);
-
-        // STREAMING_CHUNK:Initializing Background Canvas Engine...
-        // ================= INTERACTIVE HUD CANVAS BACKGROUND =================
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.radius = Math.random() * 1.5 + 0.5;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 243, 255, 0.4)';
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 60; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 243, 255, ${0.15 - dist / 1200})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateCanvas);
-        }
-        animateCanvas();
     </script>
 </body>
 </html>
