@@ -263,7 +263,7 @@
                             Checklists Interactivas
                         </h2>
                         <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
-                            Procedimientos de cabina para Airbus A320, A330, ATR72, Boeing 737, B747, Cessna 172 y Cirrus Vision Jet.
+                            Procedimientos de cabina para Airbus A320, A330, ATR42, ATR72, Boeing 737, B747, Cessna 172 y Cirrus Vision Jet.
                         </p>
                     </div>
                     <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
@@ -347,6 +347,24 @@
                     </div>
                     <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
                         <span class="text-[11px] font-mono text-zinc-500">10 BLOQUES</span>
+                        <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                            Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
+                    </div>
+                </div>
+				
+				<!-- ATR42-600 -->
+                <div onclick="selectAircraft('atr42')" class="hud-glass-card hud-interactive-card rounded-xl p-5 cursor-pointer group flex flex-col justify-between border border-zinc-800">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-medium bg-zinc-800 text-zinc-400 rounded">REGIONAL</span>
+                            <i class="fa-solid fa-plane-departure text-zinc-500 group-hover:text-zinc-200 transition-colors"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-zinc-200 transition-colors mb-1">ATR42-600</h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed">Turboprop de transporte regional.</p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-zinc-500">12 BLOQUES</span>
                         <span class="text-xs text-zinc-300 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
                             Seleccionar <i class="fa-solid fa-chevron-right text-[9px]"></i>
                         </span>
@@ -759,7 +777,7 @@
                 title: "Airbus A320 NEO",
                 sections: [
                     { title: "1. PRE START", items: ["External Power - ON", "BAT1/BAT2 - ON", "NAV LIGHTS - POS 1", "Overhead panel items - ON", "NAV1 / NAV2 / NAV3 - ON", "EMERGENCY EXIT LIGHTS - ARM", "NO SMOKING - ON", "SEATBELTS - ON", "Fill the fuel tank", "Request ground services", "QNH - SET", "FD - ON", "Request ATC clearance for taxi", "TO Config - CALCULATED", "MCDU", "Cruise altitude - SET", "BEACON Lights - ON", "APU master switch - ON + 3 missisipis", "APU START -ON", "APU bleed - ON", "Retire ground services", "Request pushback"] },
-					{ title: "2. ENGINE START", items: ["Parking Brake Set - CHECK", "Engine mode selector - START", "ENG1 - ON", "ENG2 - ON", "AUTOBRAKE - MAX", "FLAPS - SET", "SPOILERS - ARM", "TCAS - TA/RA", "TCAS MODE - ON", "WXR/PWS - 1", "SELECTOR WX L&R - ALL WX", "APU master switch - OFF", "APU bleed - OFF", "Engine mode selector - NORM"] },
+					{ title: "2. ENGINE START", items: ["Parking Brake Set - CHECK", "Thrust IDLE - CHECK", "Engine mode selector - START", "ENG1 - ON", "ENG2 - ON", "AUTOBRAKE - MAX", "FLAPS - SET", "SPOILERS - ARM", "TCAS - TA/RA", "TCAS MODE - ON", "WXR/PWS - 1", "SELECTOR WX L&R - ALL WX", "APU master switch - OFF", "APU bleed - OFF", "Engine mode selector - NORM"] },
 					{ title: "3. TAXI", items: ["Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON", "Taxi to runway (MAX 20 knots)"] },
                     { title: "4. PRE TAKE OFF", items: ["Request ATC take off clearance", "Enter into the runway", "Parking brake - SET", "TO Lights - ON", "Increase thrust to 40%", "Parking brake - RELEASE", "Take off procedure"] },
                     { title: "5. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF"] },
@@ -774,30 +792,48 @@
             a330: {
                 title: "Airbus A330-200/300",
                 sections: [
-                    { title: "1. START & PRE-TAXI", items: ["BAT1/BAT2 - ON", "External Power A - ON", "External Power B - AUTO", "NAV LIGHTS - POS 1", "Overhead panel items - ON", "EMERGENCY EXIT LIGHTS - ARM", "NO SMOKING - ON", "SEATBELTS - ON", "NAV1 / NAV2 / NAV3 - ON", "QNH - SET", "FD - ON", "Request ground services", "Fill the fuel tank", "Request ATC clearance for taxi", "MCDU", "Cruise altitude - SET", "APU master switch - ON + 3 missisipis", "APU START -ON", "APU bleed - ON", "BEACON Lights - ON", "Engine mode selector - START", "ENG1 - ON", "ENG2 - ON", "AUTOBRAKE - MAX", "TO Config - CALCULATED", "FLAPS - SET", "SPOILERS - ARM", "TCAS - TA/RA", "TCAS MODE - ON", "WXR/PWS - 1", "SELECTOR WX L&R - ALL WX", "Retire ground services", "APU master switch - OFF", "APU bleed - OFF", "Engine mode selector - NORM", "Request pushback", "Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON"] },
-                    { title: "2. TAXI", items: ["Taxi to runway"] },
-                    { title: "3. PRE TAKE OFF", items: ["Request ATC take off clearance", "TO Lights - ON"] },
-                    { title: "4. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF"] },
-                    { title: "5. NAVIGATION", items: ["Fasten seatbelts - OFF", "Speed MACH - SET", "Continue navigation"] },
-                    { title: "6. APPROACH", items: ["RAD NAV - CHECK", "Approach config - COMPLETED", "Fasten seatbelts - ON (at FL150 above landing)", "Reduce selected speed", "FLAPS - POSITION 1"] },
-                    { title: "7. FINAL APPROACH", items: ["CONTACT ATC - REQUEST LANDING", "LS - ON", "APPR - ON", "FLAPS - POSITION 2", "GEAR - DOWN", "Landing Lights - ON", "FLAPS - FULL", "Landing speed - CHECK (IAS 150 - 130 kts)", "SPOILERS ARM - CHECK", "FLAPS 40º - CHECK"] },
-                    { title: "8. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º", "SPOILERS - 0%"] },
-                    { title: "9. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU - CONECTED", "External power - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00100ft"] },
-                    { title: "10. FULL SHUTDOWN (IF NECESSARY)", items: ["External power - OFF", "BAT1 / BAT2 - OFF"] }
+                    { title: "1. PRE START", items: ["External Power A - ON", "External Power B - AUTO", "BAT1/BAT2 - ON", "NAV LIGHTS - POS 1", "Overhead panel items - ON", "NAV1 / NAV2 / NAV3 - ON", "EMERGENCY EXIT LIGHTS - ARM", "NO SMOKING - ON", "SEATBELTS - ON", "Fill the fuel tank", "Request ground services", "QNH - SET", "FD - ON", "Request ATC clearance for taxi", "TO Config - CALCULATED", "MCDU", "Cruise altitude - SET", "BEACON Lights - ON", "APU master switch - ON + 3 missisipis", "APU START -ON", "APU bleed - ON", "Retire ground services", "Request pushback"] },
+					{ title: "2. ENGINE START", items: ["Parking Brake Set - CHECK", "Thrust IDLE - CHECK", "Engine mode selector - START", "ENG1 - ON", "ENG2 - ON", "AUTOBRAKE - MAX", "FLAPS - SET", "SPOILERS - ARM", "TCAS - TA/RA", "TCAS MODE - ON", "WXR/PWS - 1", "SELECTOR WX L&R - ALL WX", "APU master switch - OFF", "APU bleed - OFF", "Engine mode selector - NORM"] },
+					{ title: "3. TAXI", items: ["Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON", "Taxi to runway (MAX 20 knots)"] },
+                    { title: "4. PRE TAKE OFF", items: ["Request ATC take off clearance", "Enter into the runway", "Parking brake - SET", "TO Lights - ON", "Increase thrust to 40%", "Parking brake - RELEASE", "Take off procedure"] },
+                    { title: "5. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "Cruise speed - SET", "ATHR - ON", "TO Lights - OFF"] },
+                    { title: "6. NAVIGATION", items: ["At TA set altimeter STD", "Fasten seatbelts - OFF", "Speed MACH - SET", "Continue navigation"] },
+                    { title: "7. APPROACH", items: ["RAD NAV - CHECK", "Approach config - COMPLETED", "Fasten seatbelts - ON (at FL150 above landing)", "Reduce selected speed", "FLAPS - EXTENDED"] },
+                    { title: "8. FINAL APPROACH", items: ["CONTACT ATC - REQUEST LANDING", "At TA reset altimeter to local", "LS - ON", "APPR - ON", "FLAPS - POSITION 2", "GEAR - DOWN", "Landing Lights - ON", "FLAPS - FULL", "Landing speed - CHECK (IAS 150 - 130 kts)", "SPOILERS ARM - CHECK", "FLAPS 40º - CHECK"] },
+                    { title: "9. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º", "SPOILERS - 0%"] },
+                    { title: "10. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU - CONECTED", "External power - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00100ft"] },
+                    { title: "11. FULL SHUTDOWN (IF NECESSARY)", items: ["External power - OFF", "BAT1 / BAT2 - OFF"] }
                 ]
             },
-			atr72: {
-                title: "Atr72-600",
+			atr42: {
+                title: "Atr42-600",
                 sections: [
                     { title: "1. INITIAL CONFIG", items: ["Tablet - Download Flight Plan", "Tablet (Flight plan page) - Set fuel & payload", "Tablet (Payload page) - Load aircraft & SET TO TRIM", "Tablet (Aircraft Page) - GPU conected both", "Tablet (Aircraft Page) - Request ground services"] },
-                    { title: "2. PRE START", items: ["Battery - ON", "Navigation Lights - ON", "EXT Power 1 & 2 - ON", "Emergency Lights - ARM", "Seatbelts Lights - ON", "No Devices Lights - ON", "Crew Oxigen - ON", "HYD PWR - ON", "Fuel Pumps - RUN", "X FEED - OPEN", "QNH - SET", "MCDU", "Cruisse Altitude - SET", "Select - FM1", "Flight Director - ON", "VNAV & LNAV - ON"] },
+                    { title: "2. PRE START", items: ["Battery - ON", "Navigation Lights - ON", "EXT Power 1 & 2 - ON", "Emergency Lights - ARM", "Seatbelts Lights - ON", "No Devices Lights - ON", "Crew Oxigen - ON", "HYD PWR - ON", "Fuel Pumps - RUN", "X FEED - OPEN", "QNH - SET", "MCDU", "Cruisse Altitude - SET", "Select - FM1", "Flight Director - ON", "NAV - ON"] },
                     { title: "3. ENGINE START", items: ["Beacon Lights - ON", "ENG START - START A & B", "PROP BRAKE - CHECK OFF", "START 2 - ON", "NH% 10 - SET FUEL SO FTR", "NH% 60 - SET FUEL SO AUTO", "START 1 - ON", "NH% 10 - SET FUEL SO FTR", "NH% 60 - SET FUEL SO AUTO", "Window Heat - ON", "Probe Heat - ON", "FLAPS - SET 15º", "EXT Power 1 & 2 - OFF"] },
 					{ title: "4. TAXI", items: ["Tablet (Aircraft Page) - GPU disconected both", "Tablet (Aircraft Page) - Close doors", "Request Pushback","Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON", "Taxi to runway (MAX 20 knots)"] },
 					{ title: "5. PRE TAKE OFF", items: ["Request ATC take off clearance", "Enter into the runway", "Parking brake - SET", "TO Lights - ON", "Increase thrust to 100%", "Parking brake - RELEASE", "Take off procedure"] },
                     { title: "6. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "TO Lights - OFF"] },
                     { title: "7. NAVIGATION", items: ["At TA set altimeter STD", "Fasten seatbelts - OFF", "PWR MGT - CRZ", "Continue navigation"] },
                     { title: "8. APPROACH", items: ["Reduce Throttle", "Approach config - COMPLETED", "Down FMC - NAV Button", "Enter active ILS", "Down Parking brake - BRG1", "Fasten seatbelts - ON (at FL070 above landing)"] },
-                    { title: "9. FINAL APPROACH", items: ["Reduce speed", "FLAPS - POSITION 1 (Below 185 kias)", "CONTACT ATC - REQUEST LANDING", "COURSE - SET", "ILS1 - SELECTED", "APPROACH - ON", "FLAPS - FULL", "GEAR - DOWN", "Landing Lights - ON", "Landing speed - CHECK (IAS 150 - 130 kts)", "FLAPS FULL - CHECK"] },
+                    { title: "9. FINAL APPROACH", items: ["Reduce speed", "FLAPS - POSITION 1 (Below 185 kias)", "CONTACT ATC - REQUEST LANDING", "ILS1 - SELECTED", "COURSE - SET", "HEADING SET - On final approach", "APPROACH - ON", "FLAPS - FULL", "GEAR - DOWN", "Landing Lights - ON", "Landing speed - CHECK (IAS 150 - 130 kts)", "FLAPS FULL - CHECK"] },
+                    { title: "10. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º"] },
+                    { title: "11. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU 1 & 2 - CONECTED", "External power 1 & 2 - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00000ft"] },
+                    { title: "12. FULL SHUTDOWN (IF NECESSARY)", items: ["External power 1 & 2 - OFF", "BATTERY - OFF"] }
+                ]
+            },
+			atr72: {
+                title: "Atr72-600",
+                sections: [
+                    { title: "1. INITIAL CONFIG", items: ["Tablet - Download Flight Plan", "Tablet (Flight plan page) - Set fuel & payload", "Tablet (Payload page) - Load aircraft & SET TO TRIM", "Tablet (Aircraft Page) - GPU conected both", "Tablet (Aircraft Page) - Request ground services"] },
+                    { title: "2. PRE START", items: ["Battery - ON", "Navigation Lights - ON", "EXT Power 1 & 2 - ON", "Emergency Lights - ARM", "Seatbelts Lights - ON", "No Devices Lights - ON", "Crew Oxigen - ON", "HYD PWR - ON", "Fuel Pumps - RUN", "X FEED - OPEN", "QNH - SET", "MCDU", "Cruisse Altitude - SET", "Select - FM1", "Flight Director - ON", "NAV - ON"] },
+                    { title: "3. ENGINE START", items: ["Beacon Lights - ON", "ENG START - START A & B", "PROP BRAKE - CHECK OFF", "START 2 - ON", "NH% 10 - SET FUEL SO FTR", "NH% 60 - SET FUEL SO AUTO", "START 1 - ON", "NH% 10 - SET FUEL SO FTR", "NH% 60 - SET FUEL SO AUTO", "Window Heat - ON", "Probe Heat - ON", "FLAPS - SET 15º", "EXT Power 1 & 2 - OFF"] },
+					{ title: "4. TAXI", items: ["Tablet (Aircraft Page) - GPU disconected both", "Tablet (Aircraft Page) - Close doors", "Request Pushback","Strobe Lights - ON", "Wing Lights - ON (If night)", "Cabin Lights - OFF (If night)", "Taxi Lights - ON", "Taxi to runway (MAX 20 knots)"] },
+					{ title: "5. PRE TAKE OFF", items: ["Request ATC take off clearance", "Enter into the runway", "Parking brake - SET", "TO Lights - ON", "Increase thrust to 100%", "Parking brake - RELEASE", "Take off procedure"] },
+                    { title: "6. POST TAKE OFF", items: ["Gear - UP", "AP - ON", "VS - SET", "FLAPS - 0º", "TO Lights - OFF"] },
+                    { title: "7. NAVIGATION", items: ["At TA set altimeter STD", "Fasten seatbelts - OFF", "PWR MGT - CRZ", "Continue navigation"] },
+                    { title: "8. APPROACH", items: ["Reduce Throttle", "Approach config - COMPLETED", "Down FMC - NAV Button", "Enter active ILS", "Down Parking brake - BRG1", "Fasten seatbelts - ON (at FL070 above landing)"] },
+                    { title: "9. FINAL APPROACH", items: ["Reduce speed", "FLAPS - POSITION 1 (Below 185 kias)", "CONTACT ATC - REQUEST LANDING", "ILS1 - SELECTED", "COURSE - SET", "HEADING SET - On final approach", "APPROACH - ON", "FLAPS - FULL", "GEAR - DOWN", "Landing Lights - ON", "Landing speed - CHECK (IAS 150 - 130 kts)", "FLAPS FULL - CHECK"] },
                     { title: "10. TAXI TO GATE", items: ["Contact ground", "Landing Lights - OFF", "Taxi Lights - ON", "FLAPS - 0º"] },
                     { title: "11. SHUTDOWN", items: ["Taxi Lights - OFF", "GPU 1 & 2 - CONECTED", "External power 1 & 2 - ON", "Fasten seatbelts - OFF", "ENG1 / ENG2 - OFF", "Strobe Lights - OFF", "BEACON Lights - OFF", "Wing Lights - OFF (If necessary)", "Selected altitude - 00000ft"] },
                     { title: "12. FULL SHUTDOWN (IF NECESSARY)", items: ["External power 1 & 2 - OFF", "BATTERY - OFF"] }
